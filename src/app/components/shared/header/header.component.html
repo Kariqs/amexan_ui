@@ -2,18 +2,18 @@
     <div class="p-2 md:p-4 bg-blue-400 w-full m-auto flex justify-evenly items-center gap-10">
         <!-- Logo -->
         <div>
-            <h1 class="text-gray-800 font-bold text-xl md:text-2xl uppercase">Medicatalyst</h1>
+            <h1 class="text-gray-800 font-bold text-xl md:text-2xl uppercase">Medcatalyst</h1>
         </div>
 
         <!-- Search Bar (desktop only) -->
-        <div class="bg-white hidden md:block p-1 text-gray-800">
+        <div class="bg-white hidden lg:block p-1 text-gray-800">
             <input placeholder="Search" class="p-1 w-60 border-none focus:outline-none" type="search">
             <i class="fas fa-search p-1"></i>
         </div>
 
         <!-- Desktop Navigation -->
         <div>
-            <ul class="hidden md:flex list-none justify-center items-center gap-6 text-gray-800 font-semibold">
+            <ul class="hidden lg:flex list-none justify-center items-center gap-6 text-gray-800 font-semibold">
                 <li *ngFor="let nav of desktopNavs">
                     <a [href]="nav.link" class="hover:text-blue-600">{{ nav.name }}</a>
                 </li>
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <div class="md:hidden">
+        <div class="lg:hidden">
             <button (click)="toggleSidebar()" class="text-gray-800">
                 <i class="fas fa-bars fa-2x"></i>
             </button>
