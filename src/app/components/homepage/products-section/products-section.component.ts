@@ -1,19 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  price: string;
-  rating: number;
-  image: string;
-}
+import { Product } from '../../../models/model';
+import { ProductCardComponent } from "../../shared/product-card/product-card.component";
 
 @Component({
   selector: 'app-products-section',
-  imports: [CommonModule],
+  imports: [CommonModule, ProductCardComponent],
   templateUrl: './products-section.component.html',
   styleUrl: './products-section.component.css',
 })

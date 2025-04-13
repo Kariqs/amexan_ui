@@ -9,5 +9,5 @@ import { HeaderComponent } from "./components/shared/header/header.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'medicatalyst';
+  title = 'medcatalyst';
 }
