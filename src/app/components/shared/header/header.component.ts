@@ -23,19 +23,11 @@ export class HeaderComponent {
     { name: 'Call Us', link: '' },
   ];
 
-  // Navigation items for desktop menu
   desktopNavs: { name: string; link: string }[] = [
     { name: 'Home', link: '' },
     { name: 'Shop', link: '' },
     { name: 'Blog', link: '' },
-    { name: 'About Us', link: '' }
-  ];
-
-  // Dropdown menu items
-  moreItems: { name: string; link: string }[] = [
-    { name: 'Blog', link: '' },
-    { name: 'Careers', link: '' },
-    { name: 'Contact', link: '' }
+    { name: 'About Us', link: '' },
   ];
 
   showSideDrawer: boolean = false;
@@ -43,12 +35,10 @@ export class HeaderComponent {
 
   constructor(private elementRef: ElementRef) {}
 
-  // Toggle the dropdown menu
   toggleMore(): void {
     this.showMore = !this.showMore;
   }
 
-  // Toggle the mobile sidebar
   toggleSidebar(): void {
     this.showSideDrawer = !this.showSideDrawer;
   }
@@ -57,11 +47,16 @@ export class HeaderComponent {
   @HostListener('document:click', ['$event'])
   onClickOutside(event: MouseEvent): void {
     const targetElement = event.target as HTMLElement;
-    const dropdown = this.elementRef.nativeElement.querySelector('.more-dropdown');
-    const dropdownButton = this.elementRef.nativeElement.querySelector('.more-button');
+    const dropdown =
+      this.elementRef.nativeElement.querySelector('.more-dropdown');
+    const dropdownButton =
+      this.elementRef.nativeElement.querySelector('.more-button');
 
     if (dropdown && dropdownButton) {
-      if (!dropdown.contains(targetElement) && !dropdownButton.contains(targetElement)) {
+      if (
+        !dropdown.contains(targetElement) &&
+        !dropdownButton.contains(targetElement)
+      ) {
         this.showMore = false;
       }
     }

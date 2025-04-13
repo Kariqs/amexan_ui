@@ -1,5 +1,5 @@
 <div class="w-full">
-    <div class="p-2 md:p-4 bg-blue-500 w-full m-auto flex justify-evenly items-center gap-10">
+    <div class="p-2 md:p-4 bg-blue-400 w-full m-auto flex justify-evenly items-center gap-10">
         <!-- Logo -->
         <div>
             <h1 class="text-gray-800 font-bold text-xl md:text-2xl uppercase">Medicatalyst</h1>
@@ -27,9 +27,9 @@
                             [ngClass]="{'rotate-180': showMore}"></i>
                     </button>
                     <div *ngIf="showMore"
-                        class="more-dropdown absolute z-10 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md">
+                        class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
                         <a *ngFor="let item of sideBarNavs" [href]="item.link"
-                            class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                            class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
                             {{ item.name }}
                         </a>
                     </div>
@@ -43,13 +43,13 @@
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden">
-            <button (click)="toggleSidebar()" class="text-white">
+            <button (click)="toggleSidebar()" class="text-gray-800">
                 <i class="fas fa-bars fa-2x"></i>
             </button>
         </div>
 
         <!-- Mobile Sidebar -->
-        <div *ngIf="showSideDrawer" class="bg-blue-400 md:hidden text-gray-100 fixed h-full top-0 left-0 p-4 z-50 w-64">
+        <div *ngIf="showSideDrawer" class="bg-blue-400 md:hidden text-gray-800 fixed h-full top-0 left-0 p-4 z-50 w-64">
             <div class="flex justify-end mb-4">
                 <button (click)="toggleSidebar()" class="text-indigo-950">
                     <i class="fas fa-times fa-lg"></i>
