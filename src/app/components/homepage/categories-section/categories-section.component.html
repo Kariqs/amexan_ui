@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
         <div *ngFor="let category of categories"
             class="bg-white rounded-lg shadow-md p-4 flex items-center space-x-3 hover:shadow-lg transition-shadow duration-300">
-            <img [src]="category.image" [alt]="category.title" class="w-6 h-6 object-contain">
+            <i [class]="category.icon + ' text-blue-500'"></i>
             <a [routerLink]="[category.link]" class="text-gray-700 font-medium">{{ category.title }}</a>
         </div>
     </div>

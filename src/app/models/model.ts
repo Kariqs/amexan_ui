@@ -16,7 +16,7 @@ export interface FaqItem {
 
 export interface Category {
   title: string;
-  image: string;
+  icon: string;
   link: string;
 }
 
