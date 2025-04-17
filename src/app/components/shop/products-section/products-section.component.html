@@ -1,0 +1,9 @@
+<section class="py-8 bg-gray-100 mt-4 border-t border-yellow-100">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div *ngFor="let product of products" class="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
+        </div>
+    </div>
+</section>
