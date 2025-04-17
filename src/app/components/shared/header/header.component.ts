@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -19,13 +20,13 @@ export class HeaderComponent {
     { name: 'Surgical Equipments', link: '' },
     { name: 'Laboratory Equipments', link: '' },
     { name: 'Imaging Products', link: '' },
-    { name: 'Shop Now', link: '' },
+    { name: 'Shop Now', link: 'shop' },
     { name: 'Call Us', link: '' },
   ];
 
   desktopNavs: { name: string; link: string }[] = [
     { name: 'Home', link: '' },
-    { name: 'Shop', link: '' },
+    { name: 'Shop', link: 'shop' },
     { name: 'Blog', link: '' },
     { name: 'About Us', link: '' },
   ];

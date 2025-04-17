@@ -15,7 +15,7 @@
         <div>
             <ul class="hidden lg:flex list-none justify-center items-center gap-6 text-gray-800 font-semibold">
                 <li *ngFor="let nav of desktopNavs">
-                    <a [href]="nav.link" class="hover:text-blue-600">{{ nav.name }}</a>
+                    <a [routerLink]="[nav.link]" class="hover:text-blue-600">{{ nav.name }}</a>
                 </li>
 
                 <!-- More Dropdown -->
