@@ -1,0 +1,89 @@
+<!-- product.component.html -->
+<div class="max-w-6xl mx-auto my-8 px-4">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border rounded-lg p-4">
+        <!-- Thumbnails Column -->
+        <div
+            class="md:col-span-2 flex flex-row md:flex-col items-center justify-start gap-2 overflow-x-auto md:overflow-y-auto">
+            <button *ngFor="let image of images; let i = index" (click)="selectImage(i)"
+                class="w-16 h-16 border rounded-md flex-shrink-0"
+                [ngClass]="{'border-blue-500 border-2': currentImageIndex === i}">
+                <img [src]="image" class="w-full h-full object-cover rounded-md" alt="Product thumbnail">
+            </button>
+            <div class="flex flex-col w-16 h-16 md:mt-auto">
+                <button class="h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-t-md"
+                    (click)="prevImage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform rotate-90 md:rotate-0" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button class="h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-b-md"
+                    (click)="nextImage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform rotate-90 md:-rotate-180"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Image Column -->
+        <div class="md:col-span-5 relative">
+            <div class="aspect-square w-full bg-white flex items-center justify-center border rounded-md">
+                <img [src]="images[currentImageIndex]" class="max-w-full max-h-full object-contain" alt="Product image">
+            </div>
+            <button
+                class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 hover:bg-white rounded-full shadow-md"
+                (click)="prevImage()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button
+                class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 hover:bg-white rounded-full shadow-md"
+                (click)="nextImage()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Product Details Column -->
+        <div class="md:col-span-5 flex flex-col">
+            <h1 class="text-2xl font-bold mb-4">{{ productName }}</h1>
+
+            <div class="mb-4">
+                <p class="text-sm font-semibold text-gray-500">PRICE</p>
+                <p class="text-lg font-medium text-green-600">{{ price }}</p>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex items-center gap-4 mb-2" *ngFor="let color of colors">
+                    <input type="radio" [id]="color" name="color" [value]="color" (change)="selectColor(color)"
+                        class="w-4 h-4">
+                    <label [for]="color" class="text-sm">{{ color }}</label>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mt-auto">
+                <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded">
+                    Start Order
+                </button>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
+                    Chat
+                </button>
+                <button
+                    class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.706 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
