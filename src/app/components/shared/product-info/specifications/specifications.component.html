@@ -1,0 +1,29 @@
+<!-- product-details.component.html -->
+<div class="flex flex-col md:flex-row w-full shadow-md rounded-lg overflow-hidden">
+    <!-- Product Details Table -->
+    <div class="w-full md:w-1/2 bg-gray-50">
+        <div class="p-4 md:p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">PRODUCT DETAILS</h2>
+
+            <div class="border rounded-lg overflow-hidden">
+                <table class="w-full text-sm">
+                    <tbody>
+                        <tr *ngFor="let spec of productSpecs; let i = index" [ngClass]="{'bg-gray-100': i % 2 === 0}">
+                            <td class="py-3 px-4 border-b border-gray-200 font-medium text-gray-700">{{ spec.label }}
+                            </td>
+                            <td class="py-3 px-4 border-b border-gray-200 text-gray-600">{{ spec.value }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Image -->
+    <div class="w-full md:w-1/2">
+        <div class="h-full bg-white">
+            <img [src]="productImageUrl" alt="Product demonstration in dental setting"
+                class="w-full h-full object-cover">
+        </div>
+    </div>
+</div>
