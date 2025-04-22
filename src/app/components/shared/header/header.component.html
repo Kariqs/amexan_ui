@@ -55,7 +55,11 @@
                     </div>
                     <div *ngIf="showMyAccount && authenticated"
                         class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
-                        <a routerLink="auth/logout" class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                        <div class="flex px-4 py-2 text-gray-700 justify-start items-center"><i
+                                class="fas fa-user mr-2"></i>
+                            <p>{{username}}</p>
+                        </div>
+                        <a (click)="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
                             Sign Out
                         </a>
                     </div>
@@ -81,6 +85,20 @@
             <ul class="flex flex-col list-none gap-4 font-semibold">
                 <li *ngFor="let nav of sideBarNavs">
                     <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
+                </li>
+                <li *ngIf="!authenticated">
+                    <a routerLink="/auth/signup" class="block py-2 hover:text-indigo-900">Sign Up</a>
+                    <a routerLink="/auth/login" class="block py-2 hover:text-indigo-900">Sign In</a>
+                </li>
+                <li *ngIf="authenticated">
+                    <h1 class="text-gray-700">Account</h1>
+                    <div class="flex px-4 py-2 text-gray-700 justify-start items-center"><i
+                            class="fas fa-user mr-2"></i>
+                        <p>{{username}}</p>
+                    </div>
+                    <a (click)="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                        Sign Out
+                    </a>
                 </li>
             </ul>
         </div>

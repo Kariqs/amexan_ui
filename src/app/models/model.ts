@@ -41,3 +41,12 @@ export interface Feature {
   title: string;
   description: string;
 }
+
+export interface DecodedToken {
+  user_id: string;
+  email: string;
+  username: string;
+  role: string;
+  iat: number;
+  exp: number;
+}

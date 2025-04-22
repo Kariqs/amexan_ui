@@ -6,7 +6,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
+import { jwtDecode } from 'jwt-decode';
+import { DecodedToken } from '../../../models/model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +24,12 @@ export class LoginComponent {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -49,7 +58,29 @@ export class LoginComponent {
       return;
     }
 
-    console.log('Form submitted:', this.loginForm.value);
-    // API call goes here
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response) => {
+        if (response) {
+          const token = this.authService.getToken();
+          if (token) {
+            const decoded = jwtDecode<DecodedToken>(token);
+            if (decoded.role === 'admin') {
+              this.router.navigate(['admin']).then(() => {
+                this.toaster.success('Login was successful.');
+                window.location.reload();
+              });
+            } else {
+              this.router.navigate(['']).then(() => {
+                this.toaster.success('Login was successful.');
+                window.location.reload();
+              });
+            }
+          }
+        }
+      },
+      error: (error) => {
+        this.toaster.error(error.message);
+      },
+    });
   }
 }

@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth/auth.service';
+import { jwtDecode } from 'jwt-decode';
+import { DecodedToken } from '../../../models/model';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +12,7 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   accountNavs: { name: string; link: string }[] = [
     { name: 'Sign Up', link: 'auth/signup' },
     { name: 'Sign In', link: 'auth/login' },
@@ -27,7 +30,6 @@ export class HeaderComponent {
     { name: 'Imaging Products', link: '' },
     { name: 'Shop Now', link: 'shop' },
     { name: 'Call Us', link: '' },
-    ...this.accountNavs,
   ];
 
   desktopNavs: { name: string; link: string }[] = [
@@ -40,9 +42,18 @@ export class HeaderComponent {
   showSideDrawer: boolean = false;
   showMore: boolean = false;
   showMyAccount: boolean = false;
-  authenticated: boolean = false;
+  authenticated!: boolean;
+  username!: string;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authenticated = this.authService.isAuthenticated();
+    this.username = this.getUsername();
+  }
 
   toggleMore(): void {
     this.showMore = !this.showMore;
@@ -53,6 +64,19 @@ export class HeaderComponent {
   }
   toggleSidebar(): void {
     this.showSideDrawer = !this.showSideDrawer;
+  }
+
+  getUsername(): string {
+    const token = this.authService.getToken();
+    if (token) {
+      const decoded = jwtDecode<DecodedToken>(token);
+      return decoded.username || decoded.email || 'Unknown';
+    }
+    return 'Guest';
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   // Close dropdown when clicking outside

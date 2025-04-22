@@ -5,17 +5,25 @@ import { ProductInfoComponent } from './components/shared/product-info/product-i
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { authGuard } from './components/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomepageComponent, title: 'Home - AMEXAN' },
-  { path: 'shop', component: ShopComponent, title: 'Shop - AMEXAN' },
+  { path: '', component: HomepageComponent, title: 'Home - Amexan' },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [authGuard],
+    title: 'Admin - Amexan',
+  },
+  { path: 'shop', component: ShopComponent, title: 'Shop - Amexan' },
   { path: 'product/:id', component: ProductInfoComponent },
   {
     path: 'auth',
     component: AuthComponent,
     children: [
-      { path: 'signup', component: SignupComponent, title: 'Signup - AMEXAN' },
-      { path: 'login', component: LoginComponent, title: 'Login - AMEXAN' },
+      { path: 'signup', component: SignupComponent, title: 'Signup - Amexan' },
+      { path: 'login', component: LoginComponent, title: 'Login - Amexan' },
     ],
   },
 ];
