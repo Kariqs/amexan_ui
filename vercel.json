@@ -1,3 +1,5 @@
 {
-    "buildCommand": "sed -i 's|__API_URL__|'\"$API_URL\"'|g' src/environments/environment.ts && ng build --configuration production"
+    "buildCommand": "sed -i'' -e \"s|__API_URL__|${API_URL}|g\" src/environments/environment.ts && ng build --configuration production",
+    "outputDirectory": "dist",
+    "ignoreCommand": "false"
 }
