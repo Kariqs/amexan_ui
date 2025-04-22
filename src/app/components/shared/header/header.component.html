@@ -28,7 +28,7 @@
                     </button>
                     <div *ngIf="showMore"
                         class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
-                        <a *ngFor="let item of sideBarNavs" [href]="item.link"
+                        <a *ngFor="let item of sideBarNavs" [routerLink]="item.link"
                             class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
                             {{ item.name }}
                         </a>
@@ -37,7 +37,30 @@
 
                 <!-- Cart & Account -->
                 <li><a href="" class="hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a></li>
-                <li><a href="" class="hover:text-blue-600"><i class="fas fa-user mr-1"></i> My Account</a></li>
+
+                <!-- Account Dropdown -->
+                <li class="relative">
+                    <button (click)="toggleMyAccount()"
+                        class="more-button text-gray-800 hover:text-blue-600 font-semibold flex items-center">
+                        <i class="fas fa-user mr-1"></i> My Account
+                        <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"
+                            [ngClass]="{'rotate-180': showMyAccount}"></i>
+                    </button>
+                    <div *ngIf="showMyAccount && !authenticated"
+                        class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
+                        <a *ngFor="let item of accountNavs" [routerLink]="item.link"
+                            class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                            {{ item.name }}
+                        </a>
+                    </div>
+                    <div *ngIf="showMyAccount && authenticated"
+                        class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
+                        <a routerLink="auth/logout" class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                            Sign Out
+                        </a>
+                    </div>
+                </li>
+
             </ul>
         </div>
 
@@ -57,7 +80,7 @@
             </div>
             <ul class="flex flex-col list-none gap-4 font-semibold">
                 <li *ngFor="let nav of sideBarNavs">
-                    <a [href]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
+                    <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
                 </li>
             </ul>
         </div>

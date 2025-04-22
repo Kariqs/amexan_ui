@@ -10,6 +10,11 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  accountNavs: { name: string; link: string }[] = [
+    { name: 'Sign Up', link: 'auth/signup' },
+    { name: 'Sign In', link: 'auth/login' },
+  ];
+
   sideBarNavs: { name: string; link: string }[] = [
     { name: 'Home', link: '' },
     { name: 'Student Packages', link: '' },
@@ -22,6 +27,7 @@ export class HeaderComponent {
     { name: 'Imaging Products', link: '' },
     { name: 'Shop Now', link: 'shop' },
     { name: 'Call Us', link: '' },
+    ...this.accountNavs,
   ];
 
   desktopNavs: { name: string; link: string }[] = [
@@ -33,6 +39,8 @@ export class HeaderComponent {
 
   showSideDrawer: boolean = false;
   showMore: boolean = false;
+  showMyAccount: boolean = false;
+  authenticated: boolean = false;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -40,6 +48,9 @@ export class HeaderComponent {
     this.showMore = !this.showMore;
   }
 
+  toggleMyAccount(): void {
+    this.showMyAccount = !this.showMyAccount;
+  }
   toggleSidebar(): void {
     this.showSideDrawer = !this.showSideDrawer;
   }
