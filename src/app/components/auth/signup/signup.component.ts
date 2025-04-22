@@ -81,7 +81,9 @@ export class SignupComponent {
           this.toaster.error('An unknown error occured.');
         }
       },
-      error: (error) => {},
+      error: (error) => {
+        this.toaster.error(error.message);
+      },
     });
   }
 
