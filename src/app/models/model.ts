@@ -1,3 +1,19 @@
+export interface User {
+  fullname: string;
+  username: string;
+  email: string;
+  phone: number;
+  occupation: string;
+  password: string;
+  acceptTerms: boolean;
+  subscribeToNews: boolean;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
+
 export interface Product {
   id: number;
   name: string;
