@@ -32,6 +32,14 @@ export class HeaderComponent implements OnInit {
     { name: 'Call Us', link: '' },
   ];
 
+  adminNavs: { name: string; link: string }[] = [
+    { name: 'Dashboard', link: 'admin' },
+    { name: 'Manage Products', link: 'admin' },
+    { name: 'Manage Orders', link: 'admin' },
+    { name: 'Manage Customers', link: 'admin' },
+    { name: 'Payment Dashboard', link: 'admin' },
+  ];
+
   desktopNavs: { name: string; link: string }[] = [
     { name: 'Home', link: '' },
     { name: 'Shop', link: 'shop' },
@@ -44,6 +52,7 @@ export class HeaderComponent implements OnInit {
   showMyAccount: boolean = false;
   authenticated!: boolean;
   username!: string;
+  isAdmin: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -70,6 +79,9 @@ export class HeaderComponent implements OnInit {
     const token = this.authService.getToken();
     if (token) {
       const decoded = jwtDecode<DecodedToken>(token);
+      if (decoded.role === 'admin') {
+        this.isAdmin = true;
+      }
       return decoded.username || decoded.email || 'Unknown';
     }
     return 'Guest';

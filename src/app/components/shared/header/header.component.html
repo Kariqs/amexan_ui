@@ -14,12 +14,20 @@
         <!-- Desktop Navigation -->
         <div>
             <ul class="hidden lg:flex list-none justify-center items-center gap-6 text-gray-800 font-semibold">
-                <li *ngFor="let nav of desktopNavs">
-                    <a [routerLink]="[nav.link]" class="hover:text-blue-600">{{ nav.name }}</a>
-                </li>
+                <div class="flex justify-center items-center gap-4" *ngIf="!isAdmin">
+                    <li *ngFor="let nav of desktopNavs">
+                        <a [routerLink]="[nav.link]" class="hover:text-blue-600">{{ nav.name }}</a>
+                    </li>
+                </div>
+
+                <div class="flex justify-center items-center gap-4" *ngIf="isAdmin">
+                    <li *ngFor="let nav of adminNavs">
+                        <a [routerLink]="[nav.link]" class="hover:text-blue-600">{{ nav.name }}</a>
+                    </li>
+                </div>
 
                 <!-- More Dropdown -->
-                <li class="relative">
+                <li *ngIf="!isAdmin" class="relative">
                     <button (click)="toggleMore()"
                         class="more-button text-gray-800 hover:text-blue-600 font-medium flex items-center">
                         More
@@ -36,7 +44,8 @@
                 </li>
 
                 <!-- Cart & Account -->
-                <li><a href="" class="hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a></li>
+                <li *ngIf="!isAdmin"><a href="" class="hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a>
+                </li>
 
                 <!-- Account Dropdown -->
                 <li class="relative">
@@ -83,13 +92,23 @@
                 </button>
             </div>
             <ul class="flex flex-col list-none gap-4 font-semibold">
-                <li *ngFor="let nav of sideBarNavs">
-                    <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
-                </li>
+                <div *ngIf="!isAdmin">
+                    <li *ngFor="let nav of sideBarNavs">
+                        <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
+                    </li>
+                </div>
+
+                <div *ngIf="isAdmin">
+                    <li *ngFor="let nav of adminNavs">
+                        <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
+                    </li>
+                </div>
+
                 <li *ngIf="!authenticated">
                     <a routerLink="/auth/signup" class="block py-2 hover:text-indigo-900">Sign Up</a>
                     <a routerLink="/auth/login" class="block py-2 hover:text-indigo-900">Sign In</a>
                 </li>
+                
                 <li *ngIf="authenticated">
                     <h1 class="text-gray-700">Account</h1>
                     <div class="flex px-4 py-2 text-gray-700 justify-start items-center"><i
