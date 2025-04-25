@@ -1,0 +1,100 @@
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-md shadow-md">
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">Add New Product</h1>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label for="brand" class="block text-sm font-medium text-gray-700 mb-1">Product Brand</label>
+      <input type="text" id="brand" formControlName="brand"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <div *ngIf="productForm.get('brand')?.touched && productForm.get('brand')?.invalid"
+        class="text-red-600 text-sm mt-1">
+        Brand is required
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+      <input type="text" id="name" formControlName="name"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <div *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid"
+        class="text-red-600 text-sm mt-1">
+        Name is required
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+      <textarea id="description" formControlName="description" rows="4"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      <div *ngIf="productForm.get('description')?.touched && productForm.get('description')?.invalid"
+        class="text-red-600 text-sm mt-1">
+        Description is required
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price</label>
+      <input type="number" id="price" formControlName="price" min="0" step="0.01"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <div *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid"
+        class="text-red-600 text-sm mt-1">
+        Valid price is required
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+      <select id="category" formControlName="category"
+        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">Select a category</option>
+        <option value="electronics">Electronics</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+        <!-- Add other categories as needed -->
+      </select>
+      <div *ngIf="productForm.get('category')?.touched && productForm.get('category')?.invalid"
+        class="text-red-600 text-sm mt-1">
+        Category is required
+      </div>
+    </div>
+
+    <!-- Add this inside your form before the submit button -->
+    <div class="mb-6">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Product Colors</label>
+
+      <div formArrayName="colors">
+        <div *ngFor="let color of colorsArray.controls; let i = index" class="flex items-center mb-2">
+          <input type="text" [formControlName]="i"
+            class="flex-1 mr-3 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter color name (e.g. red, blue)">
+
+          <button type="button" (click)="removeColor(i)" class="p-2 text-red-600 hover:text-red-800 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button type="button" (click)="addColor()"
+        class="mt-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm rounded-md flex items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Add Color
+      </button>
+
+      <div *ngIf="colorsArray.touched && colorsArray.length === 0" class="text-red-600 text-sm mt-1">
+        At least one color is required
+      </div>
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit" [disabled]="isSubmitting"
+        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50">
+        {{ isSubmitting ? 'Saving...' : 'Save and Continue' }}
+      </button>
+    </div>
+  </form>
+</div>

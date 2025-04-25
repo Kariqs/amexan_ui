@@ -7,6 +7,10 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { authGuard } from './components/guards/auth.guard';
+import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { AllProductsComponent } from './components/admin/product-manager/all-products/all-products.component';
+import { CreateProductComponent } from './components/admin/product-manager/create-product/create-product.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -15,6 +19,22 @@ export const routes: Routes = [
     component: AdminComponent,
     canActivate: [authGuard],
     title: 'Admin - Amexan',
+    children: [
+      {
+        path: '',
+        component: DashboardComponent,
+        title: 'Dashboard',
+      },
+      {
+        path: 'product-manager',
+        component: ProductManagerComponent,
+        title: 'Manage Products',
+        children: [
+          { path: 'all-products', component: AllProductsComponent },
+          { path: 'create-product', component: CreateProductComponent },
+        ],
+      },
+    ],
   },
   { path: 'shop', component: ShopComponent, title: 'Shop - Amexan' },
   { path: 'product/:id', component: ProductInfoComponent },

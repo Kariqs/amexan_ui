@@ -24,6 +24,16 @@ export interface Product {
   image: string;
 }
 
+export interface NewProduct {
+  ID?: number;
+  brand: string;
+  name: string;
+  description: string;
+  price: string;
+  colors: string[];
+  category: string;
+}
+
 export interface FaqItem {
   question: string;
   answer: string;
