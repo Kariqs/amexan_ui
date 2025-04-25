@@ -59,7 +59,7 @@ export class AuthService {
     }
   }
 
-  private handleError(error: HttpErrorResponse) {
+  public handleError(error: HttpErrorResponse) {
     if (error.status === 401) {
       this.router.navigate(['auth', 'login']);
     }

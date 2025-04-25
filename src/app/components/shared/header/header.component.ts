@@ -34,10 +34,10 @@ export class HeaderComponent implements OnInit {
 
   adminNavs: { name: string; link: string }[] = [
     { name: 'Dashboard', link: 'admin' },
-    { name: 'Manage Products', link: 'admin' },
-    { name: 'Manage Orders', link: 'admin' },
-    { name: 'Manage Customers', link: 'admin' },
-    { name: 'Payment Dashboard', link: 'admin' },
+    { name: 'Manage Products', link: 'admin/product-manager' },
+    { name: 'Manage Orders', link: 'admin/order-manager' },
+    { name: 'Manage Customers', link: 'admin/customer-manager' },
+    { name: 'Payment Dashboard', link: 'admin/payment-manager' },
   ];
 
   desktopNavs: { name: string; link: string }[] = [
