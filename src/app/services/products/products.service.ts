@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NewProduct, Product } from '../../models/model';
+import {
+  NewProduct,
+  Product,
+  ProductImage,
+  ProductSpec,
+} from '../../models/model';
 import { environment } from '../../../environments/environment.development';
 import { catchError, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -14,6 +19,18 @@ export class ProductsService {
   createProduct(productData: Product): Observable<NewProduct> {
     return this.http
       .post<NewProduct>(`${this.apiUrl}/product`, productData)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
+
+  addProductSpec(spec: ProductSpec): Observable<ProductSpec> {
+    return this.http
+      .post<ProductSpec>(`${this.apiUrl}/product-spec`, spec)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
+
+  uploadProductImage(formData: FormData): Observable<ProductImage> {
+    return this.http
+      .post<ProductImage>(`${this.apiUrl}/product-images`, formData)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 }
