@@ -11,6 +11,7 @@ import { ProductManagerComponent } from './components/admin/product-manager/prod
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { AllProductsComponent } from './components/admin/product-manager/all-products/all-products.component';
 import { CreateProductComponent } from './components/admin/product-manager/create-product/create-product.component';
+import { ProductAssetsComponent } from './components/admin/product-manager/create-product/product-assets/product-assets.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -32,6 +33,7 @@ export const routes: Routes = [
         children: [
           { path: 'all-products', component: AllProductsComponent },
           { path: 'create-product', component: CreateProductComponent },
+          { path: 'assets/:id', component: ProductAssetsComponent },
         ],
       },
     ],

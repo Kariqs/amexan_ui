@@ -10,6 +10,7 @@ import { Product } from '../../../../models/model';
 import { ProductsService } from '../../../../services/products/products.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-product',
@@ -24,7 +25,8 @@ export class CreateProductComponent {
   constructor(
     private fb: FormBuilder,
     private productService: ProductsService,
-    private router: Router
+    private router: Router,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -76,12 +78,15 @@ export class CreateProductComponent {
       next: (savedProduct) => {
         this.isSubmitting = false;
         // Navigate to the next step, passing the product ID
-        this.router.navigate(['/product/assets', savedProduct.ID]);
+        this.router
+          .navigate(['admin', 'product-manager', 'assets', savedProduct.ID])
+          .then(() => {
+            this.toaster.success('Product details saved successfully.');
+          });
       },
       error: (error) => {
         this.isSubmitting = false;
-        console.error('Error saving product:', error);
-        // Handle error appropriately (show message, etc)
+        this.toaster.error('Unable to save product details.');
       },
     });
   }

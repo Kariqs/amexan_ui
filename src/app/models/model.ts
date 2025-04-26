@@ -60,3 +60,17 @@ export interface DecodedToken {
   iat: number;
   exp: number;
 }
+
+export interface ProductSpec {
+  id?: number;
+  productId: number;
+  name: string;
+  value: string;
+}
+
+export interface ProductImage {
+  id?: number;
+  productId: number;
+  imageUrl: string;
+  isPrimary: boolean;
+}
