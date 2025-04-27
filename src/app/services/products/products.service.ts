@@ -24,7 +24,7 @@ export class ProductsService {
 
   addProductSpec(spec: ProductSpec): Observable<ProductSpec> {
     return this.http
-      .post<ProductSpec>(`${this.apiUrl}/product-spec`, spec)
+      .post<ProductSpec>(`${this.apiUrl}/product-specs`, spec)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
