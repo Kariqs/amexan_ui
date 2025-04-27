@@ -12,6 +12,7 @@ import { ProductsService } from '../../../../../services/products/products.servi
 import { ObjectURLPipe } from '../../../../../pipes/image-url.pipe';
 import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-assets',
@@ -30,7 +31,8 @@ export class ProductAssetsComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private toaster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -114,12 +116,14 @@ export class ProductAssetsComponent {
       .then(() => {
         this.isSubmitting = false;
         // Navigate to product detail or list page
-        this.router.navigate(['/products', this.productId]);
+        this.router.navigate(['admin', 'product-manager']).then(() => {
+          this.toaster.success('Product assets uploaded successfully.');
+        });
       })
       .catch((error) => {
         this.isSubmitting = false;
         console.error('Error saving product assets:', error);
-        // Handle error appropriately
+        this.toaster.error(error.message);
       });
   }
 
@@ -131,8 +135,9 @@ export class ProductAssetsComponent {
 
     const uploadPromises = this.selectedImages.map((image, index) => {
       const formData = new FormData();
-      formData.append('image', image);
+      formData.append('images', image);
       formData.append('isPrimary', index === 0 ? 'true' : 'false');
+      formData.append('productId', this.productId.toString());
 
       return firstValueFrom(this.productService.uploadProductImage(formData));
     });
