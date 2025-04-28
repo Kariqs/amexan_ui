@@ -40,4 +40,10 @@ export class ProductsService {
       .get<NewProduct[]>(`${this.apiUrl}/product`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
+
+  getProductById(productId: number): Observable<NewProduct> {
+    return this.http
+      .get<NewProduct>(`${this.apiUrl}/product/${productId}`)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
 }

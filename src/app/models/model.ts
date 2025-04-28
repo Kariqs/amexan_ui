@@ -32,7 +32,7 @@ export interface NewProduct {
   price: string;
   colors: string[];
   category: string;
-  ProductSpecs?: ProductSpec[];
+  Specifications?: ProductSpec[];
   Images?: ProductImage[];
 }
 
