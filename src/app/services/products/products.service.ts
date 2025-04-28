@@ -16,6 +16,7 @@ import { AuthService } from '../auth/auth.service';
 export class ProductsService {
   apiUrl = environment.apiUrl;
   constructor(private http: HttpClient, private authService: AuthService) {}
+
   createProduct(productData: Product): Observable<NewProduct> {
     return this.http
       .post<NewProduct>(`${this.apiUrl}/product`, productData)
@@ -31,6 +32,12 @@ export class ProductsService {
   uploadProductImage(formData: FormData): Observable<ProductImage> {
     return this.http
       .post<ProductImage>(`${this.apiUrl}/product-images`, formData)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
+
+  getProducts(): Observable<NewProduct[]> {
+    return this.http
+      .get<NewProduct[]>(`${this.apiUrl}/product`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 }

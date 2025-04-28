@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { CommonModule } from '@angular/common';
-import { Product } from '../../../models/model';
+import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { NewProduct } from '../../../models/model';
+import { ProductsService } from '../../../services/products/products.service';
+import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
 @Component({
   selector: 'app-products-section',
@@ -10,39 +12,25 @@ import { Product } from '../../../models/model';
   styleUrl: './products-section.component.css',
 })
 export class ProductsSectionComponent {
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Stethoscope',
-      brand: 'Littmann Classic III Stethoscopes',
-      description:
-        'Short description of the product goes here. Highlight the key features.',
-      price: '700',
-      rating: 5,
-      image:
-        'https://img.freepik.com/free-psd/blue-stethoscope-medical-instrument-auscultation_191095-80856.jpg?ga=GA1.1.588198607.1743692197&semt=ais_hybrid&w=740',
-    },
-    {
-      id: 2,
-      name: 'Stethoscope',
-      brand: 'Littmann Classic III Stethoscopes',
-      description:
-        'Short description of the product goes here. Highlight the key features.',
-      price: '700',
-      rating: 5,
-      image:
-        'https://img.freepik.com/free-psd/blue-stethoscope-medical-instrument-auscultation_191095-80856.jpg?ga=GA1.1.588198607.1743692197&semt=ais_hybrid&w=740',
-    },
-    {
-      id: 3,
-      name: 'Stethoscope',
-      brand: 'Littmann Classic III Stethoscopes',
-      description:
-        'Short description of the product goes here. Highlight the key features.',
-      price: '700',
-      rating: 5,
-      image:
-        'https://img.freepik.com/free-psd/blue-stethoscope-medical-instrument-auscultation_191095-80856.jpg?ga=GA1.1.588198607.1743692197&semt=ais_hybrid&w=740',
-    },
-  ];
+  products!: NewProduct[];
+
+  constructor(
+    private productsService: ProductsService,
+    private toaster: ToastrService
+  ) {}
+
+  ngOnInit(): void {
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.productsService.getProducts().subscribe({
+      next: (fetchedProducts) => {
+        this.products = fetchedProducts;
+      },
+      error: (err) => {
+        this.toaster.error(err.message);
+      },
+    });
+  }
 }
