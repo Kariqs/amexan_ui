@@ -32,6 +32,8 @@ export interface NewProduct {
   price: string;
   colors: string[];
   category: string;
+  ProductSpecs?: ProductSpec[];
+  Images?: ProductImage[];
 }
 
 export interface FaqItem {
@@ -71,6 +73,6 @@ export interface ProductSpec {
 export interface ProductImage {
   id?: number;
   productId: number;
-  imageUrl: string;
+  url: string;
   isPrimary: boolean;
 }
