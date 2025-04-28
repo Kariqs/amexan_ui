@@ -1,8 +1,9 @@
 <div class="min-h-screen flex flex-col">
     <!-- Page content -->
-    <div class="flex-grow">
-        <app-details></app-details>
-        <app-specifications></app-specifications>
+    <div class="flex-grow" *ngIf="product">
+        <app-details [product]="product"></app-details>
+        <app-specifications [productSpecs]="productSpecifications"
+            [productImageUrl]="productImage"></app-specifications>
     </div>
 
     <!-- Footer -->
