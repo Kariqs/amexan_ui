@@ -1,11 +1,41 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { NewProduct } from '../../../../models/model';
+import { ProductsService } from '../../../../services/products/products.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-products',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './all-products.component.html',
-  styleUrl: './all-products.component.css'
+  styleUrl: './all-products.component.css',
 })
-export class AllProductsComponent {
+export class AllProductsComponent implements OnInit {
+  products!: NewProduct[];
 
+  constructor(
+    private productService: ProductsService,
+    private toaster: ToastrService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.productService.getProducts().subscribe({
+      next: (fetchedProducts) => {
+        this.products = fetchedProducts;
+      },
+      error: (err) => {
+        this.toaster.error(err.message);
+      },
+    });
+  }
+
+  onCreateProduct() {
+    this.router.navigate(['admin', 'product-manager', 'create-product']);
+  }
 }

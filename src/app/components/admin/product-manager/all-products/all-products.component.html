@@ -1,1 +1,89 @@
-<p>all-products works!</p>
+<div class="w-full">
+    <div class="flex p-2 justify-end items-center">
+        <button class="p-2 bg-blue-500 text-gray-50 rounded-sm font-semibold uppercase" (click)="onCreateProduct()">Create
+            Product</button>
+    </div>
+    <div class="w-full overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-blue-500">
+                <tr>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        ID
+                    </th>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        Product
+                    </th>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        Brand
+                    </th>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        Price
+                    </th>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        Category
+                    </th>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        Image
+                    </th>
+                    <th scope="col"
+                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let product of products" class="hover:bg-gray-50">
+                    <!-- ID -->
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                        {{ product.ID || 'N/A' }}
+                    </td>
+
+                    <!-- Product Name-->
+                    <td class="px-4 py-2 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-500">{{ product.name }}</div>
+                    </td>
+
+                    <!--Product Brand-->
+                    <td class="px-4 py-2 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-500">{{ product.brand }}</div>
+
+                    </td>
+                    <!-- Price -->
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                        {{ product.price }}
+                    </td>
+
+                    <!-- Category -->
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                        {{ product.category | uppercase }}
+                    </td>
+
+                    <!-- Image  -->
+                    <td class="px-4 py-2">
+                        <div *ngIf="product.Images && product.Images.length > 0"
+                            class="flex-shrink-0 w-16 h-16 rounded overflow-hidden">
+                            <!-- Actual image element using the url -->
+                            <img [src]="product.Images[0].url" [alt]="product.name" class="w-full h-full object-cover"
+                                onerror="this.onerror=null; this.src='assets/placeholder-image.jpg';" />
+                        </div>
+                        <div *ngIf="!product.Images || product.Images.length === 0" class="text-sm text-gray-500">
+                            N/A
+                        </div>
+                    </td>
+
+                    <!--Actions-->
+                    <td class="px-4 py-2 flex justify-start items-center gap-3 whitespace-nowrap text-sm text-gray-500">
+                        <button class="p-2 rounded-sm bg-green-500 text-gray-100 font-semibold uppercase">Update</button>
+                        <button class="p-2 rounded-sm bg-red-500 text-gray-100 font-semibold uppercase">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
