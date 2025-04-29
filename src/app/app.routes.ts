@@ -31,7 +31,7 @@ export const routes: Routes = [
         component: ProductManagerComponent,
         title: 'Manage Products',
         children: [
-          { path: 'all-products', component: AllProductsComponent },
+          { path: '', component: AllProductsComponent },
           { path: 'create-product', component: CreateProductComponent },
           { path: 'assets/:id', component: ProductAssetsComponent },
         ],
