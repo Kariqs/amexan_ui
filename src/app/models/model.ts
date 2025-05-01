@@ -36,6 +36,14 @@ export interface NewProduct {
   Images?: ProductImage[];
 }
 
+export interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+}
+
 export interface FaqItem {
   question: string;
   answer: string;

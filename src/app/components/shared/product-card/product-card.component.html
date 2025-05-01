@@ -14,7 +14,9 @@
 
     <div class="flex justify-between items-center">
         <a [routerLink]="['/product', product.ID]" class="text-sm text-blue-600 hover:underline">View More</a>
-        <button class="bg-green-100 p-2 rounded-md">
+        <button *ngIf="product.ID"
+            (click)="onAddToCart(product.ID,product.name,+product.price,1,product.Images?.[0]?.url||'')"
+            class="bg-green-100 p-2 rounded-md">
             <i class="fas fa-shopping-cart text-green-600"></i>
         </button>
     </div>

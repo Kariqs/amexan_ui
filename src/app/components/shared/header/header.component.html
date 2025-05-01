@@ -44,7 +44,9 @@
                 </li>
 
                 <!-- Cart & Account -->
-                <li *ngIf="!isAdmin"><a href="" class="hover:text-blue-600"><i class="fas fa-shopping-cart"></i></a>
+                <li *ngIf="!isAdmin"><a [routerLink]="['cart']" class="hover:text-blue-600"><i
+                            class="fas fa-shopping-cart"></i> <span *ngIf="getCartTotalItems()>0"
+                            class="ml-2 bg-gray-50 p-1 rounded-sm">{{getCartTotalItems()}}</span></a>
                 </li>
 
                 <!-- Account Dropdown -->
@@ -104,11 +106,16 @@
                     </li>
                 </div>
 
+                <li *ngIf="!isAdmin"><a [routerLink]="['cart']" class="hover:text-blue-600"><i
+                            class="fas fa-shopping-cart"></i>Cart <span *ngIf="getCartTotalItems()>0"
+                            class="ml-2 bg-gray-50 p-1 rounded-sm">{{getCartTotalItems()}}</span></a>
+                </li>
+
                 <li *ngIf="!authenticated">
                     <a routerLink="/auth/signup" class="block py-2 hover:text-indigo-900">Sign Up</a>
                     <a routerLink="/auth/login" class="block py-2 hover:text-indigo-900">Sign In</a>
                 </li>
-                
+
                 <li *ngIf="authenticated">
                     <h1 class="text-gray-700">Account</h1>
                     <div class="flex px-4 py-2 text-gray-700 justify-start items-center"><i

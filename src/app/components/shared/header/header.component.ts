@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { DecodedToken } from '../../../models/model';
+import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -56,7 +57,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -108,5 +110,9 @@ export class HeaderComponent implements OnInit {
         this.showMore = false;
       }
     }
+  }
+
+  getCartTotalItems(): number {
+    return this.cartService.getTotalItems();
   }
 }
