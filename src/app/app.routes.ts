@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { AllProductsComponent } from './components/admin/product-manager/all-products/all-products.component';
 import { CreateProductComponent } from './components/admin/product-manager/create-product/create-product.component';
 import { ProductAssetsComponent } from './components/admin/product-manager/create-product/product-assets/product-assets.component';
+import { CartComponent } from './components/cart/cart.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -40,6 +41,7 @@ export const routes: Routes = [
   },
   { path: 'shop', component: ShopComponent, title: 'Shop - Amexan' },
   { path: 'product/:id', component: ProductInfoComponent },
+  { path: 'cart', component: CartComponent },
   {
     path: 'auth',
     component: AuthComponent,
