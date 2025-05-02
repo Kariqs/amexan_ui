@@ -22,21 +22,21 @@ export class CartService {
       // Sample data - in a real app, this would come from an API or user actions
       this.items = [
         {
-          id: 1,
+          productId: 1,
           name: 'Wireless Headphones',
           price: 99.99,
           quantity: 1,
           imageUrl: '/api/placeholder/200/200'
         },
         {
-          id: 2,
+          productId: 2,
           name: 'Smartphone Case',
           price: 24.99,
           quantity: 2,
           imageUrl: '/api/placeholder/200/200'
         },
         {
-          id: 3,
+          productId: 3,
           name: 'USB-C Cable Pack',
           price: 15.99,
           quantity: 1,
@@ -52,7 +52,7 @@ export class CartService {
   }
 
   addItem(item: CartItem): void {
-    const existingItem = this.items.find(i => i.id === item.id);
+    const existingItem = this.items.find(i => i.productId === item.productId);
     
     if (existingItem) {
       existingItem.quantity += item.quantity;
@@ -64,7 +64,7 @@ export class CartService {
   }
 
   updateItemQuantity(itemId: number, quantity: number): void {
-    const item = this.items.find(i => i.id === itemId);
+    const item = this.items.find(i => i.productId === itemId);
     if (item) {
       item.quantity = quantity;
       this.updateCart();
@@ -72,7 +72,7 @@ export class CartService {
   }
 
   removeItem(itemId: number): void {
-    this.items = this.items.filter(item => item.id !== itemId);
+    this.items = this.items.filter(item => item.productId !== itemId);
     this.updateCart();
   }
 

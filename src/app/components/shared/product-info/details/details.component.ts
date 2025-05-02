@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NewProduct } from '../../../../models/model';
+import { Product } from '../../../../models/model';
 
 @Component({
   selector: 'app-details',
@@ -9,7 +9,7 @@ import { NewProduct } from '../../../../models/model';
   styleUrl: './details.component.css',
 })
 export class DetailsComponent {
-  @Input() product!: NewProduct;
+  @Input() product!: Product;
 
   selectedColor: string = '';
   currentImageIndex: number = 0;

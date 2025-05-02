@@ -15,16 +15,6 @@ export interface LoginData {
 }
 
 export interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  price: string;
-  rating: number;
-  image: string;
-}
-
-export interface NewProduct {
   ID?: number;
   brand: string;
   name: string;
@@ -37,7 +27,7 @@ export interface NewProduct {
 }
 
 export interface CartItem {
-  id: number;
+  productId: number;
   name: string;
   price: number;
   quantity: number;

@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 import {
-  NewProduct,
   Product,
   ProductImage,
   ProductSpec,
 } from '../../models/model';
-import { environment } from '../../../environments/environment.development';
-import { catchError, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -17,9 +16,9 @@ export class ProductsService {
   apiUrl = environment.apiUrl;
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  createProduct(productData: Product): Observable<NewProduct> {
+  createProduct(productData: Product): Observable<Product> {
     return this.http
-      .post<NewProduct>(`${this.apiUrl}/product`, productData)
+      .post<Product>(`${this.apiUrl}/product`, productData)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
@@ -35,15 +34,15 @@ export class ProductsService {
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
-  getProducts(): Observable<NewProduct[]> {
+  getProducts(): Observable<Product[]> {
     return this.http
-      .get<NewProduct[]>(`${this.apiUrl}/product`)
+      .get<Product[]>(`${this.apiUrl}/product`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
-  getProductById(productId: number): Observable<NewProduct> {
+  getProductById(productId: number): Observable<Product> {
     return this.http
-      .get<NewProduct>(`${this.apiUrl}/product/${productId}`)
+      .get<Product>(`${this.apiUrl}/product/${productId}`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 }

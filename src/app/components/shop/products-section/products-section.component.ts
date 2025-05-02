@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { NewProduct } from '../../../models/model';
+import { Product } from '../../../models/model';
 import { ProductsService } from '../../../services/products/products.service';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 
@@ -12,7 +12,7 @@ import { ProductCardComponent } from '../../shared/product-card/product-card.com
   styleUrl: './products-section.component.css',
 })
 export class ProductsSectionComponent {
-  products!: NewProduct[];
+  products!: Product[];
 
   constructor(
     private productsService: ProductsService,

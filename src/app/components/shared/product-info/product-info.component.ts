@@ -5,7 +5,7 @@ import { SpecificationsComponent } from './specifications/specifications.compone
 import { ProductsService } from '../../../services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NewProduct, ProductSpec } from '../../../models/model';
+import { Product, ProductSpec } from '../../../models/model';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-info.component.css',
 })
 export class ProductInfoComponent implements OnInit {
-  product!: NewProduct;
+  product!: Product;
   productSpecifications!: ProductSpec[];
   productImage!: string;
 
