@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NewProduct, Product } from '../../../models/model';
+import { Product } from '../../../models/model';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { ProductsService } from '../../../services/products/products.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './products-section.component.css',
 })
 export class ProductsSectionComponent implements OnInit {
-  products!: NewProduct[];
+  products!: Product[];
 
   constructor(
     private productsService: ProductsService,

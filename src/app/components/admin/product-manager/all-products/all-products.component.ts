@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { NewProduct } from '../../../../models/model';
+import { Product } from '../../../../models/model';
 import { ProductsService } from '../../../../services/products/products.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './all-products.component.css',
 })
 export class AllProductsComponent implements OnInit {
-  products!: NewProduct[];
+  products!: Product[];
 
   constructor(
     private productService: ProductsService,

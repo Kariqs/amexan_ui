@@ -1,13 +1,14 @@
 <div class="container mx-auto p-4 max-w-4xl">
     <!-- Header Section -->
-    <div class="bg-gray-100 rounded-t-lg p-4 mb-4">
-        <h1 class="text-2xl font-bold text-gray-800">Shopping Cart</h1>
-        <p class="text-gray-600">Total Items: {{ getTotalItems() }}</p>
+    <div class="bg-blue-400 rounded-xs p-4 mb-4">
+        <h1 class="text-2xl font-bold text-gray-50">Shopping Cart</h1>
+        <p class="text-gray-50">Total Items: {{ getTotalItems() }}</p>
     </div>
 
     <!-- Cart Items -->
     <div *ngIf="cartItems.length > 0; else emptyCart">
-        <div *ngFor="let item of cartItems" class="bg-white rounded-lg shadow-md p-4 mb-4 flex flex-col md:flex-row">
+        <div *ngFor="let item of cartItems"
+            class="bg-white rounded-sm shadow-lg shadow-gray-500 p-4 mb-4 flex flex-col md:flex-row">
             <!-- Product Image -->
             <div class="w-full md:w-1/5 flex justify-center mb-4 md:mb-0">
                 <img [src]="item.imageUrl" [alt]="item.name" class="h-32 w-32 object-cover rounded-md" />
@@ -44,7 +45,8 @@
 
             <!-- Remove Button -->
             <div class="md:w-1/12 flex items-center justify-center mt-4 md:mt-0">
-                <button (click)="removeItem(item.id)" class="bg-red-500 hover:bg-red-700 p-1 rounded-sm text-gray-50 transition">
+                <button (click)="removeItem(item.productId)"
+                    class="bg-red-500 hover:bg-red-700 p-1 rounded-sm text-gray-50 transition">
                     Remove
                 </button>
             </div>
@@ -55,20 +57,21 @@
     <ng-template #emptyCart>
         <div class="bg-white rounded-lg shadow-md p-8 text-center">
             <p class="text-gray-600 text-lg">Your cart is empty</p>
-            <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
+            <button (click)="continueShopping()"
+                class="mt-4 bg-blue-400 text-white px-4 py-2 rounded-md hover:bg-blue-500 transition">
                 Continue Shopping
             </button>
         </div>
     </ng-template>
 
     <!-- Cart Summary -->
-    <div *ngIf="cartItems.length > 0" class="bg-gray-100 rounded-b-lg p-4 mt-4">
+    <div *ngIf="cartItems.length > 0" class="bg-gray-100 rounded-b-sm p-4 mt-4">
         <div class="flex justify-between items-center">
             <h2 class="text-xl font-bold text-gray-800">Total</h2>
             <p class="text-xl font-bold text-gray-800">${{ getTotal().toFixed(2) }}</p>
         </div>
         <div class="mt-4 flex justify-end">
-            <button class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition">
+            <button class="bg-blue-400 text-white px-6 py-2 rounded-md hover:bg-blue-500 transition">
                 Checkout
             </button>
         </div>

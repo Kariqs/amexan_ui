@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CartItem, NewProduct, Product } from '../../../models/model';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartItem, Product } from '../../../models/model';
 import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
@@ -11,9 +12,12 @@ import { CartService } from '../../../services/cart/cart.service';
   styleUrl: './product-card.component.css',
 })
 export class ProductCardComponent {
-  @Input() product!: NewProduct;
+  @Input() product!: Product;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private toaster: ToastrService
+  ) {}
 
   onAddToCart(
     productId: number,
@@ -23,12 +27,13 @@ export class ProductCardComponent {
     productImage: string
   ) {
     const item: CartItem = {
-      id: productId,
+      productId: productId,
       name: productName,
       price: productPrice,
       quantity: productQuantity,
       imageUrl: productImage,
     };
     this.cartService.addItem(item);
+    this.toaster.success(`${productQuantity} ${productName} added to cart.`);
   }
 }

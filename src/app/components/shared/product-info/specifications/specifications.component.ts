@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { NewProduct, ProductSpec } from '../../../../models/model';
+import { Product, ProductSpec } from '../../../../models/model';
 
 @Component({
   selector: 'app-specifications',

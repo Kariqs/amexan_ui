@@ -3,6 +3,7 @@ import { CartItem } from '../../models/model';
 import { CartService } from '../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getItems();
@@ -23,12 +24,12 @@ export class CartComponent implements OnInit {
   }
 
   increaseQuantity(item: CartItem): void {
-    this.cartService.updateItemQuantity(item.id, item.quantity + 1);
+    this.cartService.updateItemQuantity(item.productId, item.quantity + 1);
   }
 
   decreaseQuantity(item: CartItem): void {
     if (item.quantity > 1) {
-      this.cartService.updateItemQuantity(item.id, item.quantity - 1);
+      this.cartService.updateItemQuantity(item.productId, item.quantity - 1);
     }
   }
 
@@ -36,7 +37,7 @@ export class CartComponent implements OnInit {
     if (item.quantity < 1) {
       item.quantity = 1;
     }
-    this.cartService.updateItemQuantity(item.id, item.quantity);
+    this.cartService.updateItemQuantity(item.productId, item.quantity);
   }
 
   removeItem(itemId: number): void {
@@ -53,5 +54,9 @@ export class CartComponent implements OnInit {
 
   getTotalItems(): number {
     return this.cartService.getTotalItems();
+  }
+
+  continueShopping() {
+    this.router.navigate(['shop']);
   }
 }
