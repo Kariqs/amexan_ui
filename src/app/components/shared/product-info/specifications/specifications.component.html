@@ -1,5 +1,6 @@
 <!-- product-details.component.html -->
 <div class="flex flex-col md:flex-row w-full shadow-sm rounded-sm overflow-hidden">
+
     <!-- Product Details Table -->
     <div class="w-full md:w-1/2 bg-gray-50">
         <div class="p-4 md:p-6">
@@ -9,9 +10,12 @@
                 <table class="w-full text-sm">
                     <tbody>
                         <tr *ngFor="let spec of productSpecs; let i = index" [ngClass]="{'bg-gray-100': i % 2 === 0}">
-                            <td class="py-3 px-4 border-b border-gray-200 font-medium text-gray-700">{{ spec.name }}
+                            <td class="py-3 px-4 border-b border-gray-200 font-medium text-gray-700">
+                                {{ spec.name }}
                             </td>
-                            <td class="py-3 px-4 border-b border-gray-200 text-gray-600">{{ spec.value }}</td>
+                            <td class="py-3 px-4 border-b border-gray-200 text-gray-600">
+                                {{ spec.value }}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -21,9 +25,10 @@
 
     <!-- Product Image -->
     <div class="w-full md:w-1/2 p-4">
-        <div class="h-full bg-white">
+        <div class="h-full bg-white flex items-center justify-center max-w-xl mx-auto">
             <img [src]="productImageUrl" alt="Product demonstration in dental setting"
-                class="w-full h-full object-cover">
+                class="w-full h-auto max-h-[500px] object-contain">
         </div>
     </div>
+
 </div>
