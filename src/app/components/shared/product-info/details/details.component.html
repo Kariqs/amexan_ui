@@ -1,6 +1,7 @@
 <!-- product.component.html -->
 <div *ngIf="product" class="max-w-6xl mx-auto my-8 px-4">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border border-gray-400 rounded-sm p-4">
+
         <!-- Thumbnails Column -->
         <div *ngIf="product.Images"
             class="md:col-span-2 flex flex-row md:flex-col items-center justify-start gap-2 overflow-x-auto md:overflow-y-auto">
@@ -9,20 +10,16 @@
                 [ngClass]="{'border-blue-500 border-2': currentImageIndex === i}">
                 <img [src]="image.url" class="w-full h-full object-cover rounded-sm" alt="Product thumbnail">
             </button>
+
+            <!-- Scroll Arrows -->
             <div class="flex flex-col w-16 h-16 md:mt-auto">
                 <button class="h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-t-md"
                     (click)="prevImage()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform rotate-90 md:rotate-0" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
+                    <i class="fas fa-chevron-up text-sm text-gray-700"></i>
                 </button>
                 <button class="h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-b-md"
                     (click)="nextImage()">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform rotate-90 md:-rotate-180"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
+                    <i class="fas fa-chevron-down text-sm text-gray-700"></i>
                 </button>
             </div>
         </div>
@@ -34,21 +31,19 @@
                 <img [src]="product.Images[currentImageIndex].url" class="max-w-full max-h-full object-contain"
                     [alt]="product.name">
             </div>
+
+            <!-- Left Navigation -->
             <button
                 class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 hover:bg-white rounded-full shadow-md"
                 (click)="prevImage()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
+                <i class="fas fa-chevron-left text-gray-800"></i>
             </button>
+
+            <!-- Right Navigation -->
             <button
                 class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 hover:bg-white rounded-full shadow-md"
                 (click)="nextImage()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
+                <i class="fas fa-chevron-right text-gray-800"></i>
             </button>
         </div>
 
@@ -69,6 +64,7 @@
                 </div>
             </div>
 
+            <!-- Buttons -->
             <div class="flex flex-wrap gap-2 mt-auto">
                 <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded">
                     Start Order
@@ -78,11 +74,7 @@
                 </button>
                 <button
                     class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.706 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
+                    <i class="fas fa-shopping-cart text-sm"></i>
                     Add to Cart
                 </button>
             </div>
