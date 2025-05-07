@@ -17,7 +17,7 @@
             <!-- Product Details -->
             <div class="w-full md:w-2/5 flex flex-col justify-center px-4">
                 <h2 class="text-lg font-semibold text-gray-800">{{ item.name }}</h2>
-                <p class="text-gray-600">${{ item.price.toFixed(2) }}</p>
+                <p class="text-gray-600">{{ item.price.toFixed(2) |currency:'KES':'symbol' }}</p>
             </div>
 
             <!-- Quantity Controls -->
@@ -39,7 +39,7 @@
             <!-- Subtotal -->
             <div class="w-full md:w-1/5 flex items-center justify-center mt-4 md:mt-0">
                 <p class="font-semibold text-gray-800">
-                    ${{ getSubtotal(item).toFixed(2) }}
+                    {{ getSubtotal(item).toFixed(2) |currency:'KES':'symbol' }}
                 </p>
             </div>
 
@@ -68,7 +68,7 @@
     <div *ngIf="cartItems.length > 0" class="bg-gray-100 rounded-b-sm p-4 mt-4">
         <div class="flex justify-between items-center">
             <h2 class="text-xl font-bold text-gray-800">Total</h2>
-            <p class="text-xl font-bold text-gray-800">${{ getTotal().toFixed(2) }}</p>
+            <p class="text-xl font-bold text-gray-800">{{ getTotal().toFixed(2)|currency:'KES':'symbol' }}</p>
         </div>
         <div class="mt-4 flex justify-end">
             <button class="bg-blue-400 text-white px-6 py-2 rounded-md hover:bg-blue-500 transition">

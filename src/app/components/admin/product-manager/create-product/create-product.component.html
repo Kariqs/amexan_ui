@@ -46,9 +46,12 @@
       <select id="category" formControlName="category"
         class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
         <option value="">Select a category</option>
-        <option value="electronics">Electronics</option>
-        <option value="clothing">Clothing</option>
-        <option value="books">Books</option>
+        <option value="medical wears">Medical Wears</option>
+        <option value="diagnostic equipments">Diagnostic Equipments</option>
+        <option value="medical equipments">Medical Equipments</option>
+        <option value="surgical equipments">Surgical Equipments</option>
+        <option value="laboratory equipments">Laboratory Equipments</option>
+        <option value="imaging products">Imaging Products</option>
         <!-- Add other categories as needed -->
       </select>
       <div *ngIf="productForm.get('category')?.touched && productForm.get('category')?.invalid"

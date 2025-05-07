@@ -53,7 +53,7 @@
 
             <div class="mb-4">
                 <p class="text-sm font-semibold text-gray-500">PRICE</p>
-                <p class="text-lg font-medium text-green-600">{{ product.price }}</p>
+                <p class="text-lg font-medium text-green-600">{{ product.price |currency:'KES':'symbol' }}</p>
             </div>
 
             <div class="mb-6">
@@ -72,7 +72,7 @@
                 <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
                     Chat
                 </button>
-                <button
+                <button (click)="onAddToCart(product.ID!,product.name,+product.price,1,product.Images?.[0]?.url||'')"
                     class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-1">
                     <i class="fas fa-shopping-cart text-sm"></i>
                     Add to Cart

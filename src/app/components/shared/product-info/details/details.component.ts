@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Product } from '../../../../models/model';
+import { CartItem, Product } from '../../../../models/model';
+import { CartService } from '../../../../services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-details',
@@ -10,6 +12,11 @@ import { Product } from '../../../../models/model';
 })
 export class DetailsComponent {
   @Input() product!: Product;
+
+  constructor(
+    private cartService: CartService,
+    private toaster: ToastrService
+  ) {}
 
   selectedColor: string = '';
   currentImageIndex: number = 0;
@@ -35,5 +42,23 @@ export class DetailsComponent {
         (this.currentImageIndex - 1 + this.product.Images.length) %
         this.product.Images.length;
     }
+  }
+
+  onAddToCart(
+    productId: number,
+    productName: string,
+    productPrice: number,
+    productQuantity: number,
+    productImage: string
+  ) {
+    const item: CartItem = {
+      productId: productId,
+      name: productName,
+      price: productPrice,
+      quantity: productQuantity,
+      imageUrl: productImage,
+    };
+    this.cartService.addItem(item);
+    this.toaster.success(`${productQuantity} ${productName} added to cart.`);
   }
 }
