@@ -13,6 +13,7 @@ import { AllProductsComponent } from './components/admin/product-manager/all-pro
 import { CreateProductComponent } from './components/admin/product-manager/create-product/create-product.component';
 import { ProductAssetsComponent } from './components/admin/product-manager/create-product/product-assets/product-assets.component';
 import { CartComponent } from './components/cart/cart.component';
+import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -47,6 +48,11 @@ export const routes: Routes = [
     component: AuthComponent,
     children: [
       { path: 'signup', component: SignupComponent, title: 'Signup - Amexan' },
+      {
+        path: 'verify-email',
+        component: VerifyEmailComponent,
+        title: 'Verify - Email - Amexan',
+      },
       { path: 'login', component: LoginComponent, title: 'Login - Amexan' },
     ],
   },

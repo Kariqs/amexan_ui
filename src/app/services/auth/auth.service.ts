@@ -21,6 +21,12 @@ export class AuthService {
       .pipe(catchError((error) => this.handleError(error)));
   }
 
+  verifyEmail(activationToken: string) {
+    return this.http
+      .post(`${this.apiUrl}/auth/verify-email/${activationToken}`, null)
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
   login(loginData: LoginData): Observable<{ token: string }> {
     return this.http
       .post<{ token: string }>(`${this.apiUrl}/auth/login`, loginData)
