@@ -1,9 +1,20 @@
 <div class="w-full">
     <div class="flex p-2 justify-end items-center">
-        <button class="p-2 bg-blue-500 text-gray-50 rounded-sm font-semibold uppercase" (click)="onCreateProduct()">Create
+        <button class="p-2 bg-blue-500 text-gray-50 rounded-sm font-semibold uppercase"
+            (click)="onCreateProduct()">Create
             Product</button>
     </div>
-    <div class="w-full overflow-x-auto">
+
+    <div *ngIf="status === 'loading'" class="flex flex-col items-center">
+        <svg class="animate-spin h-8 w-8 text-blue-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+        <p class="text-gray-600">Loading Products...</p>
+    </div>
+
+    <div *ngIf="status === 'success'" class="w-full overflow-x-auto">
         <table class="min-w-full bg-white">
             <thead class="bg-blue-500">
                 <tr>
@@ -79,7 +90,8 @@
 
                     <!--Actions-->
                     <td class="px-4 py-2 flex justify-start items-center gap-3 whitespace-nowrap text-sm text-gray-500">
-                        <button class="p-2 rounded-sm bg-green-500 text-gray-100 font-semibold uppercase">Update</button>
+                        <button
+                            class="p-2 rounded-sm bg-green-500 text-gray-100 font-semibold uppercase">Update</button>
                         <button class="p-2 rounded-sm bg-red-500 text-gray-100 font-semibold uppercase">Delete</button>
                     </td>
                 </tr>

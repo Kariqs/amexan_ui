@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './all-products.component.css',
 })
 export class AllProductsComponent implements OnInit {
+  status: 'loading' | 'success' | 'error' = 'loading';
   products!: Product[];
 
   constructor(
@@ -27,9 +28,11 @@ export class AllProductsComponent implements OnInit {
   fetchProducts() {
     this.productService.getProducts().subscribe({
       next: (fetchedProducts) => {
+        this.status = 'success';
         this.products = fetchedProducts;
       },
       error: (err) => {
+        this.status = 'error';
         this.toaster.error(err.message);
       },
     });
