@@ -22,7 +22,6 @@ export class LoginComponent {
   loginForm!: FormGroup;
   submitted = false;
   showPassword = false;
-  showConfirmPassword = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,8 +45,6 @@ export class LoginComponent {
   togglePasswordVisibility(field: string) {
     if (field === 'password') {
       this.showPassword = !this.showPassword;
-    } else {
-      this.showConfirmPassword = !this.showConfirmPassword;
     }
   }
 
@@ -82,5 +79,9 @@ export class LoginComponent {
         this.toaster.error(error.message);
       },
     });
+  }
+
+  onForgotPassword() {
+    this.router.navigate(['auth', 'forgot-password']);
   }
 }
