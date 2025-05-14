@@ -14,6 +14,7 @@ import { CreateProductComponent } from './components/admin/product-manager/creat
 import { ProductAssetsComponent } from './components/admin/product-manager/create-product/product-assets/product-assets.component';
 import { CartComponent } from './components/cart/cart.component';
 import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
+import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -54,6 +55,11 @@ export const routes: Routes = [
         title: 'Verify - Email - Amexan',
       },
       { path: 'login', component: LoginComponent, title: 'Login - Amexan' },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordComponent,
+        title: 'Forgot-Password - Amexan',
+      },
     ],
   },
 ];
