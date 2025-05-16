@@ -40,6 +40,21 @@ export class AuthService {
       );
   }
 
+  forgotPassword(forgotPasswordData: { email: string }) {
+    return this.http
+      .post(`${this.apiUrl}/auth/forgot-password`, forgotPasswordData)
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
+  resetPassword(resetToken: string, resetPasswordData: { password: string }) {
+    return this.http
+      .post(
+        `${this.apiUrl}/auth/reset-password/${resetToken}`,
+        resetPasswordData
+      )
+      .pipe(catchError((error) => this.handleError(error)));
+  }
+
   logout(): void {
     localStorage.removeItem(this.tokenKey);
     window.location.reload();

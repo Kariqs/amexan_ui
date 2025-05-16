@@ -39,17 +39,28 @@ export class ForgotPasswordComponent {
     return this.forgotPasswordForm.controls;
   }
 
-  togglePasswordVisibility(field: string) {
-    if (field === 'password') {
-      this.showPassword = !this.showPassword;
-    }
-  }
-
   onSubmit() {
     this.submitted = true;
 
     if (this.forgotPasswordForm.invalid) {
       return;
     }
+
+    this.authService.forgotPassword(this.forgotPasswordForm.value).subscribe({
+      next: (response) => {
+        if (response) {
+          this.router.navigate(['']).then(() => {
+            this.toaster.success(
+              'Check your email for a password reset email.'
+            );
+          });
+        } else {
+          this.toaster.error('An unknown error occured');
+        }
+      },
+      error: (err) => {
+        this.toaster.error(err.message);
+      },
+    });
   }
 }
