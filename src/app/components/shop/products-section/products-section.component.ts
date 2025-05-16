@@ -26,7 +26,7 @@ export class ProductsSectionComponent {
   fetchProducts() {
     this.productsService.getProducts().subscribe({
       next: (fetchedProducts) => {
-        this.products = fetchedProducts;
+        this.products = fetchedProducts.products;
       },
       error: (err) => {
         this.toaster.error(err.message);

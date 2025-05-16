@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import {
+  FetchedProduct,
   Product,
   ProductImage,
   ProductSpec,
@@ -34,9 +35,9 @@ export class ProductsService {
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
-  getProducts(): Observable<Product[]> {
+  getProducts(): Observable<FetchedProduct> {
     return this.http
-      .get<Product[]>(`${this.apiUrl}/product`)
+      .get<FetchedProduct>(`${this.apiUrl}/product`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
