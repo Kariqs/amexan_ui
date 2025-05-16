@@ -74,3 +74,12 @@ export interface ProductImage {
   url: string;
   isPrimary: boolean;
 }
+
+export interface FetchedProduct {
+  metadata: {
+    limit: number;
+    page: number;
+    total: number;
+  };
+  products: Product[];
+}

@@ -29,7 +29,7 @@ export class AllProductsComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (fetchedProducts) => {
         this.status = 'success';
-        this.products = fetchedProducts;
+        this.products = fetchedProducts.products;
       },
       error: (err) => {
         this.status = 'error';
