@@ -1,11 +1,17 @@
-<div class="bg-sky-50 py-8 px-4 rounded-lg">
-    <h2 class="text-center text-2xl font-semibold text-gray-800 mb-6">Our Categories</h2>
+<div class="bg-sky-50 dark:bg-gray-900 py-8 px-4 rounded-lg">
+    <h2 class="text-center text-2xl font-semibold text-gray-800 dark:text-white mb-6">
+        Our Categories
+    </h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
         <div *ngFor="let category of categories"
-            class="bg-white rounded-lg shadow-md p-4 flex items-center space-x-3 hover:shadow-lg transition-shadow duration-300">
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center space-x-3 hover:shadow-lg transition-shadow duration-300">
+
             <i [class]="category.icon + ' text-blue-500'"></i>
-            <a [routerLink]="[category.link]" class="text-gray-700 font-medium">{{ category.title }}</a>
+
+            <a [routerLink]="[category.link]" class="text-gray-700 dark:text-gray-300 font-medium">
+                {{ category.title }}
+            </a>
         </div>
     </div>
 </div>
