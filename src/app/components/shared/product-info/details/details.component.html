@@ -1,25 +1,26 @@
-<!-- product.component.html -->
 <div *ngIf="product" class="max-w-6xl mx-auto my-8 px-4">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border border-gray-400 rounded-sm p-4">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border border-gray-400 dark:border-gray-600 rounded-sm p-4">
 
         <!-- Thumbnails Column -->
         <div *ngIf="product.Images"
             class="md:col-span-2 flex flex-row md:flex-col items-center justify-start gap-2 overflow-x-auto md:overflow-y-auto">
             <button *ngFor="let image of product.Images; let i = index" (click)="selectImage(i)"
-                class="w-16 h-16 border border-gray-400 p-1 rounded-sm flex-shrink-0"
+                class="w-16 h-16 border border-gray-400 dark:border-gray-600 p-1 rounded-sm flex-shrink-0"
                 [ngClass]="{'border-blue-500 border-2': currentImageIndex === i}">
                 <img [src]="image.url" class="w-full h-full object-cover rounded-sm" alt="Product thumbnail">
             </button>
 
             <!-- Scroll Arrows -->
             <div class="flex flex-col w-16 h-16 md:mt-auto">
-                <button class="h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-t-md"
+                <button
+                    class="h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-t-md"
                     (click)="prevImage()">
-                    <i class="fas fa-chevron-up text-sm text-gray-700"></i>
+                    <i class="fas fa-chevron-up text-sm text-gray-700 dark:text-gray-300"></i>
                 </button>
-                <button class="h-8 flex items-center justify-center bg-gray-100 hover:bg-gray-200 rounded-b-md"
+                <button
+                    class="h-8 flex items-center justify-center bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-b-md"
                     (click)="nextImage()">
-                    <i class="fas fa-chevron-down text-sm text-gray-700"></i>
+                    <i class="fas fa-chevron-down text-sm text-gray-700 dark:text-gray-300"></i>
                 </button>
             </div>
         </div>
@@ -27,40 +28,41 @@
         <!-- Main Image Column -->
         <div class="md:col-span-5 relative">
             <div *ngIf="product.Images"
-                class="aspect-square w-full bg-white flex items-center justify-center border border-gray-400 p-2 rounded-sm">
+                class="aspect-square w-full bg-white dark:bg-gray-800 flex items-center justify-center border border-gray-400 dark:border-gray-600 p-2 rounded-sm">
                 <img [src]="product.Images[currentImageIndex].url" class="max-w-full max-h-full object-contain"
                     [alt]="product.name">
             </div>
 
             <!-- Left Navigation -->
             <button
-                class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 hover:bg-white rounded-full shadow-md"
+                class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 rounded-full shadow-md"
                 (click)="prevImage()">
-                <i class="fas fa-chevron-left text-gray-800"></i>
+                <i class="fas fa-chevron-left text-gray-800 dark:text-gray-300"></i>
             </button>
 
             <!-- Right Navigation -->
             <button
-                class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 hover:bg-white rounded-full shadow-md"
+                class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-white/70 dark:bg-gray-700 hover:bg-white dark:hover:bg-gray-600 rounded-full shadow-md"
                 (click)="nextImage()">
-                <i class="fas fa-chevron-right text-gray-800"></i>
+                <i class="fas fa-chevron-right text-gray-800 dark:text-gray-300"></i>
             </button>
         </div>
 
         <!-- Product Details Column -->
         <div class="md:col-span-5 flex flex-col">
-            <h1 class="text-2xl font-bold mb-4">{{ product.name }}</h1>
+            <h1 class="text-2xl font-bold mb-4 text-gray-800 dark:text-white">{{ product.name }}</h1>
 
             <div class="mb-4">
-                <p class="text-sm font-semibold text-gray-500">PRICE</p>
-                <p class="text-lg font-medium text-green-600">{{ product.price |currency:'KES':'symbol' }}</p>
+                <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">PRICE</p>
+                <p class="text-lg font-medium text-green-600 dark:text-green-400">{{ product.price |
+                    currency:'KES':'symbol' }}</p>
             </div>
 
             <div class="mb-6">
                 <div class="flex items-center gap-4 mb-2" *ngFor="let color of product.colors">
                     <input type="radio" [id]="color" name="color" [value]="color" (change)="selectColor(color)"
                         class="w-4 h-4">
-                    <label [for]="color" class="text-sm">{{ color }}</label>
+                    <label [for]="color" class="text-sm dark:text-gray-300">{{ color }}</label>
                 </div>
             </div>
 
@@ -72,7 +74,8 @@
                 <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
                     Chat
                 </button>
-                <button (click)="onAddToCart(product.ID!,product.name,+product.price,1,product.Images?.[0]?.url||'')"
+                <button
+                    (click)="onAddToCart(product.ID!, product.name, +product.price, 1, product.Images?.[0]?.url || '')"
                     class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded flex items-center justify-center gap-1">
                     <i class="fas fa-shopping-cart text-sm"></i>
                     Add to Cart

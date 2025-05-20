@@ -5,6 +5,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { DecodedToken } from '../../../models/model';
 import { CartService } from '../../../services/cart/cart.service';
+import { ThemeService } from '../../../services/theme/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -54,11 +55,13 @@ export class HeaderComponent implements OnInit {
   authenticated!: boolean;
   username!: string;
   isAdmin: boolean = false;
+  isDarkMode = false;
 
   constructor(
     private elementRef: ElementRef,
     private authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

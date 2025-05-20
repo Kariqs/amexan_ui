@@ -1,132 +1,166 @@
 <div class="w-full">
-    <div class="p-2 md:p-4 bg-blue-400 w-full m-auto flex justify-between md:justify-evenly items-center gap-10">
+    <div
+        class="p-2 md:p-4 bg-gray-50 dark:bg-gray-900 w-full m-auto flex justify-between md:justify-evenly items-center gap-10">
         <!-- Logo -->
         <div>
             <img class="w-24 p-0 object-contain" src="images/logo.jpg" alt="logo">
         </div>
 
         <!-- Search Bar (desktop only) -->
-        <div class="bg-white hidden lg:block p-1 text-gray-800">
-            <input placeholder="Search" class="p-1 w-60 border-none focus:outline-none" type="search">
+        <div class="bg-white dark:bg-gray-800 hidden lg:block p-1 text-gray-600 dark:text-gray-300 rounded-sm">
+            <input placeholder="Search"
+                class="p-1 w-60 border-none focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                type="search">
             <i class="fas fa-search p-1"></i>
         </div>
 
         <!--Cart for Mobile-->
-        <div class="lg:hidden" *ngIf="!isAdmin"><a [routerLink]="['cart']" class="text-gray-600"><i
+        <div class="lg:hidden" *ngIf="!isAdmin"><a [routerLink]="['cart']" class="text-gray-600 dark:text-gray-300"><i
                     class="fas fa-shopping-cart"></i> Cart <span *ngIf="getCartTotalItems()>0"
-                    class="ml-1 text-blue-400 bg-gray-50 p-1 rounded-full">{{getCartTotalItems()}}</span></a>
+                    class="ml-1 text-indigo-600 dark:text-indigo-300 bg-gray-50 dark:bg-gray-800 p-1 rounded-full">{{getCartTotalItems()}}</span></a>
         </div>
 
         <!-- Desktop Navigation -->
         <div>
-            <ul class="hidden lg:flex list-none justify-center items-center gap-6 text-gray-800 font-semibold">
+            <ul
+                class="hidden lg:flex list-none justify-center items-center gap-6 text-gray-600 dark:text-gray-300 font-semibold">
                 <div class="flex justify-center items-center gap-4" *ngIf="!isAdmin">
                     <li *ngFor="let nav of desktopNavs">
-                        <a [routerLink]="[nav.link]" class="hover:text-blue-600">{{ nav.name }}</a>
+                        <a [routerLink]="[nav.link]" class="hover:text-indigo-600 dark:hover:text-indigo-400">{{
+                            nav.name }}</a>
                     </li>
                 </div>
 
                 <div class="flex justify-center items-center gap-4" *ngIf="isAdmin">
                     <li *ngFor="let nav of adminNavs">
-                        <a [routerLink]="[nav.link]" class="hover:text-blue-600">{{ nav.name }}</a>
+                        <a [routerLink]="[nav.link]" class="hover:text-indigo-600 dark:hover:text-indigo-400">{{
+                            nav.name }}</a>
                     </li>
                 </div>
 
                 <!-- More Dropdown -->
                 <li *ngIf="!isAdmin" class="relative">
                     <button (click)="toggleMore()"
-                        class="more-button text-gray-800 hover:text-blue-600 font-medium flex items-center">
+                        class="more-button text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium flex items-center">
                         More
                         <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"
                             [ngClass]="{'rotate-180': showMore}"></i>
                     </button>
                     <div *ngIf="showMore"
-                        class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
+                        class="more-dropdown absolute z-10 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-sm shadow-lg">
                         <a *ngFor="let item of sideBarNavs" [routerLink]="item.link"
-                            class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
                             {{ item.name }}
                         </a>
                     </div>
                 </li>
 
                 <!-- Cart & Account -->
-                <li *ngIf="!isAdmin"><a [routerLink]="['cart']" class="hover:text-blue-600"><i
-                            class="fas fa-shopping-cart"></i> <span *ngIf="getCartTotalItems()>0"
-                            class="ml-2 bg-gray-50 p-1 rounded-sm">{{getCartTotalItems()}}</span></a>
+                <li *ngIf="!isAdmin"><a [routerLink]="['cart']"
+                        class="hover:text-indigo-600 dark:hover:text-indigo-400"><i class="fas fa-shopping-cart"></i>
+                        <span *ngIf="getCartTotalItems()>0"
+                            class="ml-2 bg-indigo-50 dark:bg-indigo-900 text-indigo-600 dark:text-indigo-300 p-1 rounded-sm">{{getCartTotalItems()}}</span></a>
                 </li>
 
                 <!-- Account Dropdown -->
                 <li class="relative">
                     <button (click)="toggleMyAccount()"
-                        class="more-button text-gray-800 hover:text-blue-600 font-semibold flex items-center">
+                        class="more-button text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-semibold flex items-center">
                         <i class="fas fa-user mr-1"></i> My Account
                         <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-200"
                             [ngClass]="{'rotate-180': showMyAccount}"></i>
                     </button>
                     <div *ngIf="showMyAccount && !authenticated"
-                        class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
+                        class="more-dropdown absolute z-10 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-sm shadow-lg">
                         <a *ngFor="let item of accountNavs" [routerLink]="item.link"
-                            class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
                             {{ item.name }}
                         </a>
+                        <div *ngIf="showMyAccount">
+                            <button
+                                class="w-full text-left px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                                (click)="themeService.toggleDarkMode()">
+                                <span>{{themeService.darkMode()?'☀️ Light':'🌙 Dark'}}</span>
+                            </button>
+                        </div>
                     </div>
                     <div *ngIf="showMyAccount && authenticated"
-                        class="more-dropdown absolute z-10 mt-2 w-40 bg-blue-400 border border-gray-200 rounded-sm">
-                        <div class="flex px-4 py-2 text-gray-700 justify-start items-center"><i
+                        class="more-dropdown absolute z-10 mt-2 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-sm shadow-lg">
+                        <div class="flex px-4 py-2 text-gray-600 dark:text-gray-300 justify-start items-center"><i
                                 class="fas fa-user mr-2"></i>
                             <p>{{username}}</p>
                         </div>
-                        <a (click)="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                        <a (click)="onLogout()"
+                            class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
                             Sign Out
                         </a>
                     </div>
                 </li>
-
             </ul>
         </div>
 
         <!-- Mobile Menu Button -->
         <div class="lg:hidden">
-            <button (click)="toggleSidebar()" class="text-gray-600">
+            <button (click)="toggleSidebar()" class="text-gray-600 dark:text-gray-300">
                 <i class="fas fa-bars fa-2x"></i>
             </button>
         </div>
 
         <!-- Mobile Sidebar -->
-        <div *ngIf="showSideDrawer" class="bg-blue-400 lg:hidden text-gray-800 fixed h-full top-0 left-0 p-4 z-50 w-64">
+        <div *ngIf="showSideDrawer"
+            class="bg-white dark:bg-gray-800 lg:hidden text-gray-600 dark:text-gray-300 fixed h-full top-0 left-0 p-4 z-50 w-64 shadow-lg">
             <div class="flex justify-end mb-4">
-                <button (click)="toggleSidebar()" class="text-indigo-950">
+                <button (click)="toggleSidebar()" class="text-gray-600 dark:text-gray-300">
                     <i class="fas fa-times fa-lg"></i>
                 </button>
             </div>
             <ul class="flex flex-col list-none gap-4 font-semibold">
                 <div *ngIf="!isAdmin">
                     <li *ngFor="let nav of sideBarNavs">
-                        <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
+                        <a [routerLink]="nav.link"
+                            class="block py-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+                            {{ nav.name }}
+                        </a>
                     </li>
                 </div>
 
                 <div *ngIf="isAdmin">
                     <li *ngFor="let nav of adminNavs">
-                        <a [routerLink]="nav.link" class="block py-2 hover:text-indigo-900">{{ nav.name }}</a>
+                        <a [routerLink]="nav.link"
+                            class="block py-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+                            {{ nav.name }}
+                        </a>
                     </li>
                 </div>
 
                 <li *ngIf="!authenticated">
-                    <a routerLink="/auth/signup" class="block py-2 hover:text-indigo-900">Sign Up</a>
-                    <a routerLink="/auth/login" class="block py-2 hover:text-indigo-900">Sign In</a>
+                    <a routerLink="/auth/signup"
+                        class="block py-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Sign
+                        Up</a>
+                    <a routerLink="/auth/login"
+                        class="block py-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">Sign
+                        In</a>
                 </li>
 
                 <li *ngIf="authenticated">
-                    <h1 class="text-gray-700">Account</h1>
-                    <div class="flex px-4 py-2 text-gray-700 justify-start items-center"><i
+                    <h1 class="text-gray-900 dark:text-white font-bold mt-4 mb-2">Account</h1>
+                    <div class="flex px-4 py-2 text-gray-600 dark:text-gray-300 justify-start items-center"><i
                             class="fas fa-user mr-2"></i>
                         <p>{{username}}</p>
                     </div>
-                    <a (click)="onLogout()" class="block px-4 py-2 text-gray-700 hover:bg-blue-600">
+                    <a (click)="onLogout()"
+                        class="block px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
                         Sign Out
                     </a>
                 </li>
+
+                <div class="mt-4">
+                    <button
+                        class="px-4 py-2 w-full text-left text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                        (click)="themeService.toggleDarkMode()">
+                        <span>{{themeService.darkMode()?'☀️ Light':'🌙 Dark'}}</span>
+                    </button>
+                </div>
             </ul>
         </div>
     </div>
