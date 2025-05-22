@@ -12,6 +12,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DetailsComponent {
   @Input() product!: Product;
+  whatsAppNumber: string = '+254712439166';
+
+  getWhatsAppLink(productName: string): string {
+    const message: string = `Hello, I am interested in your product ( ${productName}). Can I get more information about it?`;
+    const encodedMessage = encodeURIComponent(message);
+    return `https://wa.me/${this.whatsAppNumber}?text=${encodedMessage}`;
+  }
 
   constructor(
     private cartService: CartService,
