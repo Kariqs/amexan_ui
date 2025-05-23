@@ -8,7 +8,7 @@
 
         <!-- Search Bar (desktop only) -->
         <div class="bg-white dark:bg-gray-800 hidden lg:block p-1 text-gray-600 dark:text-gray-300 rounded-sm">
-            <input placeholder="Search"
+            <input placeholder="Search" [(ngModel)]="searchTerm" (input)="onSearch()"
                 class="p-1 w-60 border-none focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                 type="search">
             <i class="fas fa-search p-1"></i>
@@ -77,10 +77,9 @@
                             {{ item.name }}
                         </a>
                         <div *ngIf="showMyAccount">
-                            <button
-                                class="w-full text-left px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                            <button class="w-full text-left px-4 py-2 text-gray-600 dark:text-gray-300"
                                 (click)="themeService.toggleDarkMode()">
-                                <span>{{themeService.darkMode()?'☀️ Light':'🌙 Dark'}}</span>
+                                <span>{{themeService.darkMode()?'☀️ Light Mode':'🌙 Dark Mode'}}</span>
                             </button>
                         </div>
                     </div>
@@ -155,10 +154,9 @@
                 </li>
 
                 <div class="mt-4">
-                    <button
-                        class="px-4 py-2 w-full text-left text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    <button class="px-4 py-2 w-full text-left text-gray-600 dark:text-gray-300"
                         (click)="themeService.toggleDarkMode()">
-                        <span>{{themeService.darkMode()?'☀️ Light':'🌙 Dark'}}</span>
+                        <span>{{themeService.darkMode()?'☀️ Light Mode':'🌙 Dark Mode'}}</span>
                     </button>
                 </div>
             </ul>
