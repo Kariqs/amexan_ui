@@ -1,1 +1,73 @@
-<p>search works!</p>
+<h1 class="text-gray-900 dark:text-white text-center mb-6">
+    <span *ngIf="searchTerm">Search Results for "{{searchTerm}}"</span>
+    <span *ngIf="!searchTerm">Search Results</span>
+</h1>
+
+<!-- Loading state -->
+<div *ngIf="status === 'loading'" class="flex flex-col items-center py-12">
+    <svg class="animate-spin h-8 w-8 text-gray-900 dark:text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    <p class="text-gray-900 dark:text-white">Processing search results...</p>
+</div>
+
+<!-- Success state -->
+<div *ngIf="status === 'success'">
+    <section *ngFor="let sect of sections" class="py-8 bg-gray-50 dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-6">{{sect.title}}</h2>
+
+            <!-- No results found -->
+            <div *ngIf="sect.products.length === 0" class="text-center text-red-600 dark:text-red-400 py-12">
+                <div class="mb-4">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+                <p class="text-lg font-medium">No products found</p>
+                <p class="mt-2">
+                    <span *ngIf="searchTerm">Your search for "{{searchTerm}}" didn't return any results.</span>
+                    <span *ngIf="!searchTerm">Please try a different search term.</span>
+                </p>
+                <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                    Try adjusting your search or browse our categories.
+                </p>
+            </div>
+
+            <!-- Products grid - 2 columns on small devices, 2 on medium, 3 on large -->
+            <div *ngIf="sect.products.length > 0"
+                class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div *ngFor="let product of sect.products">
+                    <app-product-card [product]="product"></app-product-card>
+                </div>
+            </div>
+
+            <!-- Results count -->
+            <div *ngIf="sect.products.length > 0" class="text-center mt-8">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Showing {{sect.products.length}} result<span *ngIf="sect.products.length !== 1">s</span>
+                    <span *ngIf="searchTerm"> for "{{searchTerm}}"</span>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Error state -->
+<div *ngIf="status === 'error'" class="text-center text-red-600 dark:text-red-400 py-12">
+    <div class="mb-4">
+        <svg class="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+        </svg>
+    </div>
+    <p class="text-lg font-medium mb-2">Search Error</p>
+    <p>An error occurred while processing your search. Please try again later.</p>
+    <button *ngIf="searchTerm" (click)="fetchSearchedProduct(searchTerm)"
+        class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200">
+        Try Again
+    </button>
+</div>
