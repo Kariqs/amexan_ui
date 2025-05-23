@@ -1,15 +1,32 @@
-<!-- Featured Products Section -->
-<section *ngFor="let sect of sections" class="py-8 bg-gray-50 dark:bg-gray-900">
-    <div class="max-w-6xl mx-auto px-4">
-        <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-1">{{sect.title}}</h2>
-        <p *ngIf="sect.description" class="text-center text-gray-600 dark:text-gray-300 mb-1">{{sect.description}}</p>
-        <p *ngIf="sect.announcement" class="text-center text-indigo-600 dark:text-indigo-400 font-bold mb-6">
-            {{sect.announcement}}</p>
+<!-- Loading state -->
+<div *ngIf="status === 'loading'" class="flex flex-col items-center">
+    <svg class="animate-spin h-8 w-8 text-gray-900 dark:text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    <p class="text-gray-900, dark:text-white">Fetching Products...</p>
+</div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div *ngFor="let product of sect.products">
-                <app-product-card [product]="product"></app-product-card>
+
+<div *ngIf="status === 'success'">
+    <section *ngFor="let sect of sections" class="py-8 bg-gray-50 dark:bg-gray-900">
+        <div *ngIf="status === 'success'" class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-1">{{sect.title}}</h2>
+            <p *ngIf="sect.description" class="text-center text-gray-600 dark:text-gray-300 mb-1">{{sect.description}}
+            </p>
+            <p *ngIf="sect.announcement" class="text-center text-indigo-600 dark:text-indigo-400 font-bold mb-6">
+                {{sect.announcement}}</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div *ngFor="let product of sect.products">
+                    <app-product-card [product]="product"></app-product-card>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
+
+<div *ngIf="status === 'error'" class="text-center text-red-600 dark:text-red-400 py-6">
+    <p>An error occurred while loading products. Please try again later.</p>
+</div>

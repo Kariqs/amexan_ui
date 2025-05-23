@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsSectionComponent implements OnInit {
   products!: Product[];
   sections!: Section[];
+  status: 'loading' | 'success' | 'error' = 'loading';
 
   constructor(
     private productsService: ProductsService,
@@ -28,6 +29,7 @@ export class ProductsSectionComponent implements OnInit {
     this.productsService.getProducts().subscribe({
       next: (fetchedProducts) => {
         this.products = fetchedProducts.products;
+        this.status = 'success';
         this.sections = [
           {
             title: 'Featured Products',
@@ -41,6 +43,7 @@ export class ProductsSectionComponent implements OnInit {
         ];
       },
       error: (err) => {
+        this.status = 'error';
         this.toaster.error(err.message);
       },
     });
