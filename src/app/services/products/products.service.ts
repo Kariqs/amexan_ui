@@ -41,6 +41,12 @@ export class ProductsService {
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
+  searchProduct(searchTerm: string): Observable<FetchedProduct> {
+    return this.http
+      .get<FetchedProduct>(`${this.apiUrl}/product?search=${searchTerm}`)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
+
   getProductById(productId: number): Observable<Product> {
     return this.http
       .get<Product>(`${this.apiUrl}/product/${productId}`)

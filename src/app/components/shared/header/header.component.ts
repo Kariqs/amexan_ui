@@ -251,4 +251,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   get themeToggleText(): string {
     return this.isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode';
   }
+
+  onLogoClick() {
+    this.router.navigate(['/']);
+  }
 }
