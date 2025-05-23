@@ -8,7 +8,6 @@
     <p class="text-gray-900, dark:text-white">Fetching Products...</p>
 </div>
 
-
 <div *ngIf="status === 'success'">
     <section *ngFor="let sect of sections" class="py-8 bg-gray-50 dark:bg-gray-900">
         <div *ngIf="status === 'success'" class="max-w-6xl mx-auto px-4">
@@ -18,7 +17,8 @@
             <p *ngIf="sect.announcement" class="text-center text-indigo-600 dark:text-indigo-400 font-bold mb-6">
                 {{sect.announcement}}</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Updated grid: 2 columns on small devices, 2 on medium, 3 on large -->
+            <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
                 <div *ngFor="let product of sect.products">
                     <app-product-card [product]="product"></app-product-card>
                 </div>
