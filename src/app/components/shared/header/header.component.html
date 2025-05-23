@@ -186,10 +186,11 @@
 
         <!-- Sidebar Content -->
         <div
-            class="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 absolute h-full top-0 left-0 p-4 w-80 max-w-[85vw] shadow-lg">
+            class="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 absolute h-full top-0 left-0 w-80 max-w-[85vw] shadow-lg flex flex-col">
 
             <!-- Sidebar Header -->
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+            <div
+                class="flex justify-between items-center p-4 pb-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
                 <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Menu</h2>
                 <button (click)="toggleSidebar()"
                     class="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white p-1">
@@ -197,32 +198,35 @@
                 </button>
             </div>
 
-            <!-- Navigation Links -->
-            <nav class="flex-1 overflow-y-auto">
-                <ul class="space-y-2">
+            <!-- Scrollable Navigation Content -->
+            <div class="flex-1 overflow-y-auto px-4 pb-4">
+                <!-- Navigation Links -->
+                <nav class="py-2">
+                    <ul class="space-y-2">
 
-                    <!-- Regular User Navigation -->
-                    <ng-container *ngIf="!userState.isAdmin">
-                        <li *ngFor="let nav of sideBarNavs">
-                            <a [routerLink]="nav.link" (click)="toggleSidebar()"
-                                routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900"
-                                class="block py-3 px-2 rounded text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                {{ nav.name }}
-                            </a>
-                        </li>
-                    </ng-container>
+                        <!-- Regular User Navigation -->
+                        <ng-container *ngIf="!userState.isAdmin">
+                            <li *ngFor="let nav of sideBarNavs">
+                                <a [routerLink]="nav.link" (click)="toggleSidebar()"
+                                    routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900"
+                                    class="block py-3 px-2 rounded text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    {{ nav.name }}
+                                </a>
+                            </li>
+                        </ng-container>
 
-                    <!-- Admin Navigation -->
-                    <ng-container *ngIf="userState.isAdmin">
-                        <li *ngFor="let nav of adminNavs">
-                            <a [routerLink]="nav.link" (click)="toggleSidebar()"
-                                routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900"
-                                class="block py-3 px-2 rounded text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                {{ nav.name }}
-                            </a>
-                        </li>
-                    </ng-container>
-                </ul>
+                        <!-- Admin Navigation -->
+                        <ng-container *ngIf="userState.isAdmin">
+                            <li *ngFor="let nav of adminNavs">
+                                <a [routerLink]="nav.link" (click)="toggleSidebar()"
+                                    routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900"
+                                    class="block py-3 px-2 rounded text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                    {{ nav.name }}
+                                </a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </nav>
 
                 <!-- Authentication Section -->
                 <div class="mt-8 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -268,7 +272,7 @@
                         </button>
                     </div>
                 </div>
-            </nav>
+            </div>
         </div>
     </div>
 </div>

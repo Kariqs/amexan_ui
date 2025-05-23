@@ -149,9 +149,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   private subscribeToCartChanges(): void {
-    // Assuming cart service has an observable for cart changes
-    // If not, you might need to add this to your cart service
-    this.cartItemCount = this.cartService.getTotalItems();
+    this.cartService.cart$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.cartItemCount = this.cartService.getTotalItems();
+    });
   }
 
   // UI Toggle Methods
