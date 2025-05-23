@@ -1,16 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterModule,
+} from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { DecodedToken } from '../../../models/model';
 import { CartService } from '../../../services/cart/cart.service';
 import { ThemeService } from '../../../services/theme/theme.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -55,13 +62,16 @@ export class HeaderComponent implements OnInit {
   authenticated!: boolean;
   username!: string;
   isAdmin: boolean = false;
-  isDarkMode = false;
+  isDarkMode: boolean = false;
+  searchTerm: string = '';
 
   constructor(
     private elementRef: ElementRef,
     private authService: AuthService,
     private cartService: CartService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -117,5 +127,13 @@ export class HeaderComponent implements OnInit {
 
   getCartTotalItems(): number {
     return this.cartService.getTotalItems();
+  }
+
+  onSearch() {
+    if (this.searchTerm) {
+      this.router.navigate(['search'], { queryParams: { q: this.searchTerm } });
+    } else {
+      this.router.navigate([''], { relativeTo: this.route });
+    }
   }
 }

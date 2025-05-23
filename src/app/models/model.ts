@@ -83,3 +83,10 @@ export interface FetchedProduct {
   };
   products: Product[];
 }
+
+export interface Section {
+  title: string;
+  description?: string;
+  announcement?: string;
+  products: Product[];
+}
