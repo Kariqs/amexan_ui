@@ -56,7 +56,8 @@
                 <!-- Main Navigation Links -->
                 <ng-container *ngIf="!userState.isAdmin">
                     <li *ngFor="let nav of desktopNavs">
-                        <a [routerLink]="[nav.link]" routerLinkActive="text-indigo-600 dark:text-indigo-400"
+                        <a [routerLink]="[nav.link]" [routerLinkActiveOptions]="{exact:true}"
+                            routerLinkActive="text-indigo-600 dark:text-indigo-400"
                             class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                             {{ nav.name }}
                         </a>
@@ -208,6 +209,7 @@
                         <ng-container *ngIf="!userState.isAdmin">
                             <li *ngFor="let nav of sideBarNavs">
                                 <a [routerLink]="nav.link" (click)="toggleSidebar()"
+                                    [routerLinkActiveOptions]="{exact:true}"
                                     routerLinkActive="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900"
                                     class="block py-3 px-2 rounded text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                     {{ nav.name }}
