@@ -65,9 +65,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ],
     admin: [
       { name: 'Dashboard', link: 'admin' },
-      { name: 'Manage Products', link: 'admin/product-manager' },
-      { name: 'Manage Orders', link: 'admin/order-manager' },
-      { name: 'Manage Customers', link: 'admin/customer-manager' },
+      { name: 'Products', link: 'admin/product-manager' },
+      { name: 'Orders', link: 'admin/order-manager' },
+      { name: 'Customers', link: 'admin/customer-manager' },
       { name: 'Payment Dashboard', link: 'admin/payment-manager' },
     ],
     desktop: [
