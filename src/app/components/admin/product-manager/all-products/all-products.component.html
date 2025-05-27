@@ -1,101 +1,97 @@
 <div class="w-full">
     <div class="flex p-2 justify-end items-center">
-        <button class="p-2 bg-blue-500 text-gray-50 rounded-sm font-semibold uppercase"
-            (click)="onCreateProduct()">Create
-            Product</button>
+        <button
+            class="p-2 bg-violet-600 text-white rounded-sm font-semibold uppercase hover:bg-violet-700 transition dark:bg-violet-500 dark:hover:bg-violet-600"
+            (click)="onCreateProduct()">Create Product</button>
     </div>
 
     <div *ngIf="status === 'loading'" class="flex flex-col items-center">
-        <svg class="animate-spin h-8 w-8 text-blue-500 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24">
+        <svg class="animate-spin h-8 w-8 text-violet-600 mb-4 dark:text-violet-400" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
         </svg>
-        <p class="text-gray-600">Loading Products...</p>
+        <p class="text-gray-600 dark:text-gray-300">Loading Products...</p>
     </div>
 
     <div *ngIf="status === 'success'" class="w-full overflow-x-auto">
-        <table class="min-w-full bg-white">
-            <thead class="bg-blue-500">
+        <table class="min-w-full bg-white dark:bg-gray-800">
+            <thead class="bg-violet-600 dark:bg-violet-500">
                 <tr>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         ID
                     </th>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         Product
                     </th>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         Brand
                     </th>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         Price
                     </th>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         Category
                     </th>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         Image
                     </th>
-                    <th scope="col"
-                        class="px-4 py-2 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">
+                    <th class="px-4 py-2 text-left text-xs font-semibold text-white uppercase tracking-wider">
                         Actions
                     </th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                <tr *ngFor="let product of products" class="hover:bg-gray-50">
-                    <!-- ID -->
-                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+            <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                <tr *ngFor="let product of products" class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
                         {{ product.ID || 'N/A' }}
                     </td>
-
-                    <!-- Product Name-->
                     <td class="px-4 py-2 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-500">{{ product.name }}</div>
+                        <div class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ product.name }}</div>
                     </td>
-
-                    <!--Product Brand-->
                     <td class="px-4 py-2 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-500">{{ product.brand }}</div>
-
+                        <div class="text-sm font-medium text-gray-700 dark:text-gray-100">{{ product.brand }}</div>
                     </td>
-                    <!-- Price -->
-                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
                         {{ product.price }}
                     </td>
-
-                    <!-- Category -->
-                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
                         {{ product.category | uppercase }}
                     </td>
-
-                    <!-- Image  -->
                     <td class="px-4 py-2">
                         <div *ngIf="product.Images && product.Images.length > 0"
                             class="flex-shrink-0 w-16 h-16 rounded overflow-hidden">
-                            <!-- Actual image element using the url -->
                             <img [src]="product.Images[0].url" [alt]="product.name" class="w-full h-full object-cover"
                                 onerror="this.onerror=null; this.src='assets/placeholder-image.jpg';" />
                         </div>
-                        <div *ngIf="!product.Images || product.Images.length === 0" class="text-sm text-gray-500">
+                        <div *ngIf="!product.Images || product.Images.length === 0"
+                            class="text-sm text-gray-500 dark:text-gray-400">
                             N/A
                         </div>
                     </td>
-
-                    <!--Actions-->
-                    <td class="px-4 py-2 flex justify-start items-center gap-3 whitespace-nowrap text-sm text-gray-500">
+                    <td
+                        class="px-4 py-2 flex justify-start items-center gap-3 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300">
                         <button
-                            class="p-2 rounded-sm bg-green-500 text-gray-100 font-semibold uppercase">Update</button>
-                        <button class="p-2 rounded-sm bg-red-500 text-gray-100 font-semibold uppercase">Delete</button>
+                            class="p-2 rounded-sm bg-amber-500 text-white font-semibold uppercase hover:bg-amber-600 transition dark:bg-amber-400 dark:hover:bg-amber-500">
+                            Update
+                        </button>
+                        <button
+                            class="p-2 rounded-sm bg-rose-500 text-white font-semibold uppercase hover:bg-rose-600 transition dark:bg-rose-400 dark:hover:bg-rose-500">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="mt-2">
+            <div class="flex flex-col gap-2 ">
+                <label class="text-gray-900 dark:text-white" for="">Number of records</label>
+                <select [(ngModel)]="limit" (change)="onSelectChange($event)"
+                    class="w-32 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="" disabled selected class="text-gray-400">{{pageMetadata.limit}}</option>
+                    <option *ngFor="let limit of numberOfRecords" [value]="limit">{{ limit }}</option>
+                </select>
+            </div>
+        </div>
     </div>
 </div>
