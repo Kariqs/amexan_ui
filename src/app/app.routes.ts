@@ -17,6 +17,7 @@ import { VerifyEmailComponent } from './components/auth/verify-email/verify-emai
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { SearchComponent } from './components/shared/search/search.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -70,4 +71,5 @@ export const routes: Routes = [
     ],
   },
   { path: 'search', component: SearchComponent },
+  { path: 'checkout', component: CheckoutComponent },
 ];

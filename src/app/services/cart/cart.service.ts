@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CartItem } from '../../models/model';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private items: CartItem[] = [];
@@ -20,29 +19,7 @@ export class CartService {
       this.cartSubject.next(this.items);
     } else {
       // Sample data - in a real app, this would come from an API or user actions
-      this.items = [
-        {
-          productId: 1,
-          name: 'Wireless Headphones',
-          price: 99.99,
-          quantity: 1,
-          imageUrl: '/api/placeholder/200/200'
-        },
-        {
-          productId: 2,
-          name: 'Smartphone Case',
-          price: 24.99,
-          quantity: 2,
-          imageUrl: '/api/placeholder/200/200'
-        },
-        {
-          productId: 3,
-          name: 'USB-C Cable Pack',
-          price: 15.99,
-          quantity: 1,
-          imageUrl: '/api/placeholder/200/200'
-        }
-      ];
+      this.items = [];
       this.updateCart();
     }
   }
@@ -52,19 +29,19 @@ export class CartService {
   }
 
   addItem(item: CartItem): void {
-    const existingItem = this.items.find(i => i.productId === item.productId);
-    
+    const existingItem = this.items.find((i) => i.productId === item.productId);
+
     if (existingItem) {
       existingItem.quantity += item.quantity;
     } else {
       this.items.push(item);
     }
-    
+
     this.updateCart();
   }
 
   updateItemQuantity(itemId: number, quantity: number): void {
-    const item = this.items.find(i => i.productId === itemId);
+    const item = this.items.find((i) => i.productId === itemId);
     if (item) {
       item.quantity = quantity;
       this.updateCart();
@@ -72,7 +49,7 @@ export class CartService {
   }
 
   removeItem(itemId: number): void {
-    this.items = this.items.filter(item => item.productId !== itemId);
+    this.items = this.items.filter((item) => item.productId !== itemId);
     this.updateCart();
   }
 
@@ -91,6 +68,9 @@ export class CartService {
   }
 
   getTotal(): number {
-    return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return this.items.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   }
 }

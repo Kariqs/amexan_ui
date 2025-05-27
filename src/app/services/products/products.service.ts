@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
@@ -35,9 +35,13 @@ export class ProductsService {
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
-  getProducts(): Observable<FetchedProduct> {
+  getProducts(page?: number, limit?: number): Observable<FetchedProduct> {
+    let params = new HttpParams();
+    if (page != null) params = params.set('page', page.toString());
+    if (limit != null) params = params.set('limit', limit.toString());
+
     return this.http
-      .get<FetchedProduct>(`${this.apiUrl}/product`)
+      .get<FetchedProduct>(`${this.apiUrl}/product`, { params })
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
