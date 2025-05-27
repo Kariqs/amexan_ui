@@ -25,16 +25,20 @@
             </div>
         </div>
         <div class="mt-4 flex justify-center gap-6 items-center">
-            <div class="bg-white dark:bg-gray-800 p-2">
+            <div (click)="onPreviousPage(pageMetadata.previousPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
                 <i class="fas fa-chevron-left text-indigo-600 dark:text-indigo-400"></i>
             </div>
-            <div *ngIf="pageMetadata.hasPreviousPage" class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400">
+            <div *ngIf="pageMetadata.hasPrevPage"
+                class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
                 {{pageMetadata.previousPage}}</div>
-            <div class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400">{{pageMetadata.currentPage}}
+            <div class="bg-indigo-600 dark:bg-gray-400 p-2 text-white dark:text-gray-800 rounded-xs">
+                {{pageMetadata.currentPage}}
             </div>
-            <div *ngIf="pageMetadata.hasNextPage" class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400">{{pageMetadata.nextPage}}
+            <div *ngIf="pageMetadata.hasNextPage"
+                class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
+                {{pageMetadata.nextPage}}
             </div>
-            <div class="bg-white dark:bg-gray-800 p-2">
+            <div (click)="onNextPage(pageMetadata.nextPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
                 <i class="fas fa-chevron-right text-indigo-600 dark:text-indigo-400"></i>
             </div>
         </div>

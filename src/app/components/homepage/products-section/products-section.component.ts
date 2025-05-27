@@ -20,7 +20,7 @@ export class ProductsSectionComponent implements OnInit {
     nextPage: number;
     previousPage: number;
     hasNextPage: boolean;
-    hasPreviousPage: boolean;
+    hasPrevPage: boolean;
     total: number;
   };
   status: 'loading' | 'success' | 'error' = 'loading';
@@ -34,8 +34,16 @@ export class ProductsSectionComponent implements OnInit {
     this.fetchProducts();
   }
 
-  fetchProducts() {
-    this.productsService.getProducts().subscribe({
+  onPreviousPage(page: number, limit?: number) {
+    this.fetchProducts(page, limit);
+  }
+
+  onNextPage(page: number, limit?: number) {
+    this.fetchProducts(page, limit);
+  }
+
+  fetchProducts(page?: number, limit?: number) {
+    this.productsService.getProducts(page, limit).subscribe({
       next: (fetchedProducts) => {
         this.pageMetadata = fetchedProducts.metadata;
         this.products = fetchedProducts.products;

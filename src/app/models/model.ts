@@ -82,7 +82,7 @@ export interface FetchedProduct {
     nextPage: number;
     previousPage: number;
     hasNextPage: boolean;
-    hasPreviousPage: boolean;
+    hasPrevPage: boolean;
     total: number;
   };
   products: Product[];
