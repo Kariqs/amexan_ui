@@ -14,6 +14,15 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsSectionComponent implements OnInit {
   products!: Product[];
   sections!: Section[];
+  pageMetadata!: {
+    limit: number;
+    currentPage: number;
+    nextPage: number;
+    previousPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    total: number;
+  };
   status: 'loading' | 'success' | 'error' = 'loading';
 
   constructor(
@@ -28,6 +37,7 @@ export class ProductsSectionComponent implements OnInit {
   fetchProducts() {
     this.productsService.getProducts().subscribe({
       next: (fetchedProducts) => {
+        this.pageMetadata = fetchedProducts.metadata;
         this.products = fetchedProducts.products;
         this.status = 'success';
         this.sections = [

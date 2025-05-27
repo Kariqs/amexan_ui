@@ -78,7 +78,11 @@ export interface ProductImage {
 export interface FetchedProduct {
   metadata: {
     limit: number;
-    page: number;
+    currentPage: number;
+    nextPage: number;
+    previousPage: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
     total: number;
   };
   products: Product[];

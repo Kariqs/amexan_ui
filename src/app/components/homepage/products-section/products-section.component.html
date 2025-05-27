@@ -24,6 +24,20 @@
                 </div>
             </div>
         </div>
+        <div class="mt-4 flex justify-center gap-6 items-center">
+            <div class="bg-white dark:bg-gray-800 p-2">
+                <i class="fas fa-chevron-left text-indigo-600 dark:text-indigo-400"></i>
+            </div>
+            <div *ngIf="pageMetadata.hasPreviousPage" class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400">
+                {{pageMetadata.previousPage}}</div>
+            <div class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400">{{pageMetadata.currentPage}}
+            </div>
+            <div *ngIf="pageMetadata.hasNextPage" class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400">{{pageMetadata.nextPage}}
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-2">
+                <i class="fas fa-chevron-right text-indigo-600 dark:text-indigo-400"></i>
+            </div>
+        </div>
     </section>
 </div>
 
