@@ -4,10 +4,11 @@ import { Product, Section } from '../../../models/model';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { ProductsService } from '../../../services/products/products.service';
 import { ToastrService } from 'ngx-toastr';
+import { PaginationComponent } from "../../shared/pagination/pagination.component";
 
 @Component({
   selector: 'app-products-section',
-  imports: [CommonModule, ProductCardComponent],
+  imports: [CommonModule, ProductCardComponent, PaginationComponent],
   templateUrl: './products-section.component.html',
   styleUrl: './products-section.component.css',
 })

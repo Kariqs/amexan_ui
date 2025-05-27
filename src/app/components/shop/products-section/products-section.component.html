@@ -16,24 +16,9 @@
         </div>
     </div>
 
-    <div class="mt-4 flex justify-center gap-6 items-center">
-        <div (click)="onPreviousPage(pageMetadata.previousPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
-            <i class="fas fa-chevron-left text-indigo-600 dark:text-indigo-400"></i>
-        </div>
-        <div *ngIf="pageMetadata.hasPrevPage"
-            class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
-            {{pageMetadata.previousPage}}</div>
-        <div class="bg-indigo-600 dark:bg-gray-400 p-2 text-white dark:text-gray-800 rounded-xs">
-            {{pageMetadata.currentPage}}
-        </div>
-        <div *ngIf="pageMetadata.hasNextPage"
-            class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
-            {{pageMetadata.nextPage}}
-        </div>
-        <div (click)="onNextPage(pageMetadata.nextPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
-            <i class="fas fa-chevron-right text-indigo-600 dark:text-indigo-400"></i>
-        </div>
-    </div>
+    <app-pagination [pageMetadata]="pageMetadata" (previousPage)="onPreviousPage($event)"
+        (nextPage)="onNextPage($event)">
+    </app-pagination>
 </section>
 
 <div *ngIf="status === 'error'" class="text-center text-red-600 dark:text-red-400 py-6">

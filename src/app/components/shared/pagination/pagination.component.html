@@ -1,0 +1,25 @@
+<div class="mt-4 flex justify-center gap-6 items-center">
+    <div *ngIf="pageMetadata.hasPrevPage" (click)="onPreviousPage()"
+        class="bg-white dark:bg-gray-800 p-2 rounded-xs cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <i class="fas fa-chevron-left text-indigo-600 dark:text-indigo-400"></i>
+    </div>
+
+    <div *ngIf="pageMetadata.hasPrevPage" (click)="onPreviousPage()"
+        class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        {{pageMetadata.previousPage}}
+    </div>
+
+    <div class="bg-indigo-600 dark:bg-gray-400 p-2 text-white dark:text-gray-800 rounded-xs">
+        {{pageMetadata.currentPage}}
+    </div>
+
+    <div *ngIf="pageMetadata.hasNextPage" (click)="onNextPage()"
+        class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        {{pageMetadata.nextPage}}
+    </div>
+
+    <div *ngIf="pageMetadata.hasNextPage" (click)="onNextPage()"
+        class="bg-white dark:bg-gray-800 p-2 rounded-xs cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+        <i class="fas fa-chevron-right text-indigo-600 dark:text-indigo-400"></i>
+    </div>
+</div>

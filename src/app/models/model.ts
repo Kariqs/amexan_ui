@@ -75,16 +75,18 @@ export interface ProductImage {
   isPrimary: boolean;
 }
 
+export interface PageMetadata {
+  limit: number;
+  currentPage: number;
+  nextPage: number;
+  previousPage: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  total: number;
+}
+
 export interface FetchedProduct {
-  metadata: {
-    limit: number;
-    currentPage: number;
-    nextPage: number;
-    previousPage: number;
-    hasNextPage: boolean;
-    hasPrevPage: boolean;
-    total: number;
-  };
+  metadata: PageMetadata;
   products: Product[];
 }
 
