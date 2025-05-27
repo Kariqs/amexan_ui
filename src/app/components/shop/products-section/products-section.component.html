@@ -1,4 +1,13 @@
-<section class="py-8 bg-gray-100 dark:bg-gray-900 mt-4">
+<div *ngIf="status === 'loading'" class="flex flex-col items-center">
+    <svg class="animate-spin h-8 w-8 text-gray-900 dark:text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+        viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+    </svg>
+    <p class="text-gray-900, dark:text-white">Fetching Products...</p>
+</div>
+
+<section *ngIf="status === 'success'" class="py-8 bg-gray-100 dark:bg-gray-900 mt-4">
     <div class="max-w-6xl mx-auto px-4">
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             <div *ngFor="let product of products">
@@ -6,4 +15,27 @@
             </div>
         </div>
     </div>
+
+    <div class="mt-4 flex justify-center gap-6 items-center">
+        <div (click)="onPreviousPage(pageMetadata.previousPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
+            <i class="fas fa-chevron-left text-indigo-600 dark:text-indigo-400"></i>
+        </div>
+        <div *ngIf="pageMetadata.hasPrevPage"
+            class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
+            {{pageMetadata.previousPage}}</div>
+        <div class="bg-indigo-600 dark:bg-gray-400 p-2 text-white dark:text-gray-800 rounded-xs">
+            {{pageMetadata.currentPage}}
+        </div>
+        <div *ngIf="pageMetadata.hasNextPage"
+            class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
+            {{pageMetadata.nextPage}}
+        </div>
+        <div (click)="onNextPage(pageMetadata.nextPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
+            <i class="fas fa-chevron-right text-indigo-600 dark:text-indigo-400"></i>
+        </div>
+    </div>
 </section>
+
+<div *ngIf="status === 'error'" class="text-center text-red-600 dark:text-red-400 py-6">
+    <p>An error occurred while loading products. Please try again later.</p>
+</div>

@@ -14,6 +14,17 @@ import { ProductCardComponent } from '../../shared/product-card/product-card.com
 export class ProductsSectionComponent {
   products!: Product[];
 
+  pageMetadata!: {
+    limit: number;
+    currentPage: number;
+    nextPage: number;
+    previousPage: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    total: number;
+  };
+  status: 'loading' | 'success' | 'error' = 'loading';
+
   constructor(
     private productsService: ProductsService,
     private toaster: ToastrService
@@ -23,13 +34,25 @@ export class ProductsSectionComponent {
     this.fetchProducts();
   }
 
-  fetchProducts() {
-    this.productsService.getProducts().subscribe({
+  onPreviousPage(page: number, limit?: number) {
+    this.fetchProducts(page, limit);
+  }
+
+  onNextPage(page: number, limit?: number) {
+    this.fetchProducts(page, limit);
+  }
+
+  fetchProducts(page?: number, limit?: number) {
+    this.status = 'loading';
+    this.productsService.getProducts(page, limit).subscribe({
       next: (fetchedProducts) => {
+        this.pageMetadata = fetchedProducts.metadata;
         this.products = fetchedProducts.products;
+        this.status = 'success';
       },
       error: (err) => {
         this.toaster.error(err.message);
+        this.status = 'error';
       },
     });
   }

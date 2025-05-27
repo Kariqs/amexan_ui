@@ -43,6 +43,7 @@ export class ProductsSectionComponent implements OnInit {
   }
 
   fetchProducts(page?: number, limit?: number) {
+    this.status = 'loading';
     this.productsService.getProducts(page, limit).subscribe({
       next: (fetchedProducts) => {
         this.pageMetadata = fetchedProducts.metadata;
