@@ -5,27 +5,29 @@
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
     </svg>
-    <p class="text-gray-900, dark:text-white">Fetching Products...</p>
+    <p class="text-gray-900 dark:text-white">Fetching Products...</p>
 </div>
 
-<div *ngIf="status === 'success'">
+<!-- Success state (only rendered if status is 'success') -->
+<ng-container *ngIf="status === 'success'">
     <section *ngFor="let sect of sections" class="py-8 bg-gray-50 dark:bg-gray-900">
-        <div *ngIf="status === 'success'" class="max-w-6xl mx-auto px-4">
+        <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-1">{{sect.title}}</h2>
             <p *ngIf="sect.description" class="text-center text-gray-600 dark:text-gray-300 mb-1">{{sect.description}}
             </p>
             <p *ngIf="sect.announcement" class="text-center text-indigo-600 dark:text-indigo-400 font-bold mb-6">
                 {{sect.announcement}}</p>
 
-            <!-- Updated grid: 2 columns on small devices, 2 on medium, 3 on large -->
             <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                 <div *ngFor="let product of sect.products">
                     <app-product-card [product]="product"></app-product-card>
                 </div>
             </div>
         </div>
+
         <div class="mt-4 flex justify-center gap-6 items-center">
-            <div (click)="onPreviousPage(pageMetadata.previousPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
+            <div (click)="onPreviousPage(pageMetadata.previousPage)"
+                class="bg-white dark:bg-gray-800 p-2 rounded-xs cursor-pointer">
                 <i class="fas fa-chevron-left text-indigo-600 dark:text-indigo-400"></i>
             </div>
             <div *ngIf="pageMetadata.hasPrevPage"
@@ -38,13 +40,15 @@
                 class="bg-white dark:bg-gray-800 p-2 text-indigo-600 dark:text-indigo-400 rounded-xs">
                 {{pageMetadata.nextPage}}
             </div>
-            <div (click)="onNextPage(pageMetadata.nextPage)" class="bg-white dark:bg-gray-800 p-2 rounded-xs">
+            <div (click)="onNextPage(pageMetadata.nextPage)"
+                class="bg-white dark:bg-gray-800 p-2 rounded-xs cursor-pointer">
                 <i class="fas fa-chevron-right text-indigo-600 dark:text-indigo-400"></i>
             </div>
         </div>
     </section>
-</div>
+</ng-container>
 
+<!-- Error state -->
 <div *ngIf="status === 'error'" class="text-center text-red-600 dark:text-red-400 py-6">
     <p>An error occurred while loading products. Please try again later.</p>
 </div>
