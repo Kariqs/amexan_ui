@@ -18,7 +18,6 @@ export class CartService {
       this.items = JSON.parse(savedCart);
       this.cartSubject.next(this.items);
     } else {
-      // Sample data - in a real app, this would come from an API or user actions
       this.items = [];
       this.updateCart();
     }
