@@ -63,12 +63,12 @@ export class LoginComponent {
             const decoded = jwtDecode<DecodedToken>(token);
             if (decoded.role === 'admin') {
               this.router.navigate(['admin']).then(() => {
-                this.toaster.success('Login was successful.');
+                this.toaster.info('Login was successful.');
                 window.location.reload();
               });
             } else {
               this.router.navigate(['']).then(() => {
-                this.toaster.success('Login was successful.');
+                this.toaster.info('Login was successful.');
                 window.location.reload();
               });
             }

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItem } from '../../models/model';
+import { CartItem, DecodedToken } from '../../models/model';
 import { CartService } from '../../services/cart/cart.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { AuthService } from '../../services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +17,12 @@ import { Router } from '@angular/router';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private authService: AuthService,
+    private toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getItems();
@@ -61,6 +69,13 @@ export class CartComponent implements OnInit {
   }
 
   onClickCheckout() {
-    this.router.navigate(['checkout']);
+    const token = this.authService.getToken();
+    if (token) {
+      this.router.navigate(['checkout']);
+    } else {
+      this.router.navigate(['auth', 'login']).then(() => {
+        this.toaster.info('Kindly login before checking out.');
+      });
+    }
   }
 }

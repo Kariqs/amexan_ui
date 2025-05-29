@@ -50,7 +50,7 @@ export class ForgotPasswordComponent {
       next: (response) => {
         if (response) {
           this.router.navigate(['']).then(() => {
-            this.toaster.success(
+            this.toaster.info(
               'Check your email for a password reset email.'
             );
           });

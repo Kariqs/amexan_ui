@@ -74,8 +74,8 @@ export class SignupComponent {
       next: (response) => {
         if (response) {
           this.router.navigate(['auth', 'login']);
-          this.toaster.success(
-            'Account created successfully. Login to access your account.'
+          this.toaster.info(
+            'Account created successfully. Check your emeil to activate your account before login.'
           );
         } else {
           this.toaster.error('An unknown error occured.');

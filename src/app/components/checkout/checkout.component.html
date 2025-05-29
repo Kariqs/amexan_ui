@@ -76,14 +76,14 @@
 
                         <!-- Address -->
                         <div class="mb-4">
-                            <label for="address"
+                            <label for="deliveryLocation"
                                 class="block text-gray-700 dark:text-gray-200 mb-2 text-sm font-medium">
                                 Shipping Town*
                             </label>
-                            <input type="text" id="address" formControlName="address"
-                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <div *ngIf="submitted && f['address']?.errors" class="text-red-500 mt-1 text-sm">
-                                <div *ngIf="f['address']?.errors?.['required']">Address is required</div>
+                            <input type="text" id="deliveryLocation" formControlName="deliveryLocation"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+                            <div *ngIf="submitted && f['deliveryLocation']?.errors" class="text-red-500 mt-1 text-sm">
+                                <div *ngIf="f['deliveryLocation']?.errors?.['required']">Address is required</div>
                             </div>
                         </div>
                     </div>
