@@ -96,3 +96,21 @@ export interface Section {
   announcement?: string;
   products: Product[];
 }
+
+export interface Order {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  deliveryLocation: string;
+  orderItems: OrderItems[];
+}
+
+export interface OrderItems {
+  orderId?: string;
+  productId: number;
+  name: string;
+  price: number;
+  quantity: number;
+}

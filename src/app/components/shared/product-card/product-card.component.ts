@@ -34,6 +34,6 @@ export class ProductCardComponent {
       imageUrl: productImage,
     };
     this.cartService.addItem(item);
-    this.toaster.success(`${productQuantity} ${productName} added to cart.`);
+    this.toaster.info(`${productQuantity} ${productName} added to cart.`);
   }
 }
