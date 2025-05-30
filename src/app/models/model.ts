@@ -98,12 +98,16 @@ export interface Section {
 }
 
 export interface Order {
+  ID: number;
   userId: number;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   deliveryLocation: string;
+  total: number;
+  createdAt: string;
+  status?: string;
   orderItems: OrderItems[];
 }
 

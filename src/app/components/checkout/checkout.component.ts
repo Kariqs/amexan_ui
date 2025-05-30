@@ -12,6 +12,7 @@ import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '../../services/auth/auth.service';
 import { CheckoutService } from '../../services/checkout/checkout.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     private authService: AuthService,
     private checkoutService: CheckoutService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -93,6 +95,7 @@ export class CheckoutComponent implements OnInit {
     this.checkoutData = {
       userId: this.userId,
       ...this.checkoutForm.value,
+      total: this.getTotal(),
       orderItems: this.orderItems.map((item) => ({
         productId: item.productId,
         name: item.name,
@@ -104,9 +107,10 @@ export class CheckoutComponent implements OnInit {
     this.checkoutService.createOrder(this.checkoutData).subscribe({
       next: (response: any) => {
         if (response) {
-          this.toaster.info('Your order has been placed successfully.');
-          this.checkoutForm.reset();
-          this.cartService.clearCart()
+          this.router.navigate(['order']).then(() => {
+            this.toaster.info('Your order has been placed successfully.');
+            this.cartService.clearCart();
+          });
         } else {
           this.toaster.error('There was an error placing your order.');
         }

@@ -255,4 +255,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onLogoClick() {
     this.router.navigate(['/']);
   }
+
+  onMyOrdersClick() {
+    this.router.navigate(['order']);
+    this.closeAllDropdowns();
+  }
 }

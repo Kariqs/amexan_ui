@@ -141,6 +141,15 @@
                                 <span class="font-medium">{{ userState.username }}</span>
                             </div>
                         </div>
+
+                        <div
+                            class="px-4 py-2 text-gray-600 dark:text-gray-300 border-b cursor-pointer border-gray-200 dark:border-gray-700">
+                            <div (click)="onMyOrdersClick()" class="flex items-center">
+                                <i class="fas fa-receipt mr-2"></i>
+                                <span class="font-medium">My Orders</span>
+                            </div>
+                        </div>
+
                         <button (click)="onLogout()"
                             class="w-full text-left px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-red-600 dark:hover:text-red-400 transition-colors">
                             <i class="fas fa-sign-out-alt mr-2"></i>
@@ -257,6 +266,14 @@
                             <div class="flex items-center text-gray-600 dark:text-gray-300">
                                 <i class="fas fa-user mr-2"></i>
                                 <span class="font-medium">{{ userState.username }}</span>
+                            </div>
+                        </div>
+
+                        <div (click)="onMyOrdersClick()"
+                            class="bg-gray-50 cursor-pointer dark:bg-gray-900 rounded p-3 mb-3">
+                            <div class="flex items-center text-gray-600 dark:text-gray-300">
+                                <i class="fas fa-receipt mr-2"></i>
+                                <span class="font-medium">My Orders</span>
                             </div>
                         </div>
                         <button (click)="onLogout()"
