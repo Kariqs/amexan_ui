@@ -1,5 +1,15 @@
 <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
 
+    <!-- Loading State -->
+    <div *ngIf="status === 'loading'" class="flex flex-col items-center">
+        <svg class="animate-spin h-8 w-8 text-gray-900 dark:text-white mb-4" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+        <p class="text-gray-900 dark:text-white">Fetching Your Orders...</p>
+    </div>
+
     <!-- No Orders Empty State -->
     <div *ngIf="orders && orders.length === 0" class="bg-white dark:bg-gray-900 text-center">
         <div class="mx-auto w-24 h-24 mb-6">
@@ -168,5 +178,10 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="status === 'error'" class="text-center text-red-600 dark:text-red-400 py-6">
+        <p>An error occurred while loading your orders. Please try again later.</p>
     </div>
 </div>

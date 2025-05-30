@@ -16,6 +16,7 @@ export class OrderComponent {
   showItems = false;
   orders!: Order[];
   userId!: number;
+  status: 'loading' | 'success' | 'error' = 'loading';
 
   constructor(
     private orderService: OrderService,
@@ -41,11 +42,14 @@ export class OrderComponent {
   }
 
   getOrdersByUserId(userId: number) {
+    this.status = 'loading';
     this.orderService.getOrdersByCustomerId(userId).subscribe({
       next: (fetchedOrders) => {
+        this.status = 'success';
         this.orders = fetchedOrders.orders;
       },
       error: (err) => {
+        this.status = 'error';
         this.toaster.error(err.message);
       },
     });
