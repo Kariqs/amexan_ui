@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DecodedToken, Order } from '../../models/model';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../../services/order/order.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
+import { OrderCardComponent } from '../shared/order-card/order-card.component';
 
 @Component({
   selector: 'app-order',
-  imports: [CommonModule],
+  imports: [CommonModule, OrderCardComponent],
   templateUrl: './order.component.html',
   styleUrl: './order.component.css',
 })
 export class OrderComponent {
-  showItems = false;
+  isAdmin: boolean = false;
   orders!: Order[];
   userId!: number;
   status: 'loading' | 'success' | 'error' = 'loading';
@@ -29,15 +30,14 @@ export class OrderComponent {
     this.getOrdersByUserId(this.userId);
   }
 
-  toggleItemsVisibility(): void {
-    this.showItems = !this.showItems;
-  }
-
   getUserId() {
     const token = this.authService.getToken();
     if (token) {
       const decoded = jwtDecode<DecodedToken>(token);
       this.userId = +decoded.user_id;
+      if (decoded.role === 'admin') {
+        this.isAdmin = true;
+      }
     }
   }
 

@@ -106,7 +106,7 @@ export interface Order {
   phone: string;
   deliveryLocation: string;
   total: number;
-  createdAt: string;
+  CreatedAt: string;
   status?: string;
   orderItems: OrderItems[];
 }
