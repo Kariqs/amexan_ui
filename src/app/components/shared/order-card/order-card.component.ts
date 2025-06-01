@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Order } from '../../../models/model';
 import { FormsModule } from '@angular/forms';
+import { OrderService } from '../../../services/order/order.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-card',
@@ -10,6 +13,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './order-card.component.css',
 })
 export class OrderCardComponent {
+  showItems = false;
+  @Input() order!: Order;
+  @Input() isAdmin!: boolean;
+
+  constructor(
+    private orderService: OrderService,
+    private toaster: ToastrService
+  ) {}
+
+  toggleItemsVisibility(): void {
+    this.showItems = !this.showItems;
+  }
+
   contactSupport(arg0: number) {
     throw new Error('Method not implemented.');
   }
@@ -27,14 +43,16 @@ export class OrderCardComponent {
   refundOrder(arg0: number) {
     throw new Error('Method not implemented.');
   }
-  onStatusChange(arg0: number, arg1: string | undefined) {
-    throw new Error('Method not implemented.');
-  }
-  showItems = false;
-  @Input() order!: Order;
-  @Input() isAdmin!: boolean;
-
-  toggleItemsVisibility(): void {
-    this.showItems = !this.showItems;
+  onStatusChange(event: Event, orderId: number) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    const patchData = { status: selectedValue };
+    this.orderService.updateOrderStatus(orderId, patchData).subscribe({
+      next: (response) => {
+        this.toaster.info(response.message);
+      },
+      error: (error) => {
+        this.toaster.error(error.message);
+      },
+    });
   }
 }
