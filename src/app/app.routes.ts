@@ -6,7 +6,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { authGuard } from './components/guards/auth.guard';
+import { authGuard } from './services/guards/auth.guard';
 import { ProductManagerComponent } from './components/admin/product-manager/product-manager.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { AllProductsComponent } from './components/admin/product-manager/all-products/all-products.component';
@@ -22,19 +22,20 @@ import { OrderComponent } from './components/order/order.component';
 import { OrdersManagerComponent } from './components/admin/orders-manager/orders-manager.component';
 import { AllOrdersComponent } from './components/admin/orders-manager/all-orders/all-orders.component';
 import { SingleOrderComponent } from './components/admin/orders-manager/single-order/single-order.component';
-import { adminRedirectGuard } from './components/guards/admin/admin-redirect.guard';
+import { userGuard } from './services/guards/admin/user.guard';
+import { adminGuard } from './services/guards/admin/admin.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    canActivate: [adminRedirectGuard],
+    canActivate: [userGuard],
     component: HomepageComponent,
     title: 'Home - Amexan',
   },
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard, adminGuard],
     title: 'Admin - Amexan',
     children: [
       {
@@ -71,14 +72,14 @@ export const routes: Routes = [
   },
   {
     path: 'shop',
-    canActivate: [adminRedirectGuard],
+    canActivate: [userGuard],
     component: ShopComponent,
     title: 'Shop - Amexan',
   },
   { path: 'product/:id', component: ProductInfoComponent },
   {
     path: 'cart',
-    canActivate: [adminRedirectGuard],
+    canActivate: [userGuard],
     component: CartComponent,
     title: 'Cart',
   },
@@ -107,19 +108,19 @@ export const routes: Routes = [
   },
   {
     path: 'search',
-    canActivate: [adminRedirectGuard],
+    canActivate: [userGuard],
     component: SearchComponent,
     title: 'Search',
   },
   {
     path: 'checkout',
-    canActivate: [authGuard, adminRedirectGuard],
+    canActivate: [authGuard, userGuard],
     component: CheckoutComponent,
     title: 'Checkout',
   },
   {
     path: 'order',
-    canActivate: [authGuard, adminRedirectGuard],
+    canActivate: [authGuard, userGuard],
     component: OrderComponent,
   },
 ];

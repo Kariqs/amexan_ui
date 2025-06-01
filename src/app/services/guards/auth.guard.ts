@@ -5,9 +5,10 @@ import { inject } from '@angular/core';
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
+
   if (authService.isAuthenticated()) {
     return true;
   } else {
-    return router.createUrlTree(['/']);
+    return router.createUrlTree(['/auth/login']);
   }
 };
