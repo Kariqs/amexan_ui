@@ -22,9 +22,15 @@ import { OrderComponent } from './components/order/order.component';
 import { OrdersManagerComponent } from './components/admin/orders-manager/orders-manager.component';
 import { AllOrdersComponent } from './components/admin/orders-manager/all-orders/all-orders.component';
 import { SingleOrderComponent } from './components/admin/orders-manager/single-order/single-order.component';
+import { adminRedirectGuard } from './components/guards/admin/admin-redirect.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomepageComponent, title: 'Home - Amexan' },
+  {
+    path: '',
+    canActivate: [adminRedirectGuard],
+    component: HomepageComponent,
+    title: 'Home - Amexan',
+  },
   {
     path: 'admin',
     component: AdminComponent,
@@ -63,9 +69,19 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'shop', component: ShopComponent, title: 'Shop - Amexan' },
+  {
+    path: 'shop',
+    canActivate: [adminRedirectGuard],
+    component: ShopComponent,
+    title: 'Shop - Amexan',
+  },
   { path: 'product/:id', component: ProductInfoComponent },
-  { path: 'cart', component: CartComponent, title: 'Cart' },
+  {
+    path: 'cart',
+    canActivate: [adminRedirectGuard],
+    component: CartComponent,
+    title: 'Cart',
+  },
   {
     path: 'auth',
     component: AuthComponent,
@@ -89,12 +105,21 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'search', component: SearchComponent, title: 'Search' },
+  {
+    path: 'search',
+    canActivate: [adminRedirectGuard],
+    component: SearchComponent,
+    title: 'Search',
+  },
   {
     path: 'checkout',
-    canActivate: [authGuard],
+    canActivate: [authGuard, adminRedirectGuard],
     component: CheckoutComponent,
     title: 'Checkout',
   },
-  { path: 'order', canActivate: [authGuard], component: OrderComponent },
+  {
+    path: 'order',
+    canActivate: [authGuard, adminRedirectGuard],
+    component: OrderComponent,
+  },
 ];
