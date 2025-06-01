@@ -15,7 +15,13 @@ export class OrderService {
 
   getOrdersByCustomerId(userId: number): Observable<{ orders: Order[] }> {
     return this.http
-      .get<{ orders: Order[] }>(`${this.apiUrl}/orders/${userId}`)
+      .get<{ orders: Order[] }>(`${this.apiUrl}/user/${userId}/orders`)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
+
+  getOrdersById(orderId: number): Observable<{ order: Order }> {
+    return this.http
+      .get<{ order: Order }>(`${this.apiUrl}/order/${orderId}`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 
@@ -28,7 +34,10 @@ export class OrderService {
     if (limit != null) params = params.set('limit', limit.toString());
 
     return this.http
-      .get<{ metadata: PageMetadata; orders: Order[] }>(`${this.apiUrl}/order`, { params })
+      .get<{ metadata: PageMetadata; orders: Order[] }>(
+        `${this.apiUrl}/order`,
+        { params }
+      )
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 }

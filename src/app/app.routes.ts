@@ -20,6 +20,8 @@ import { SearchComponent } from './components/shared/search/search.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrdersManagerComponent } from './components/admin/orders-manager/orders-manager.component';
+import { AllOrdersComponent } from './components/admin/orders-manager/all-orders/all-orders.component';
+import { SingleOrderComponent } from './components/admin/orders-manager/single-order/single-order.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'Home - Amexan' },
@@ -47,7 +49,17 @@ export const routes: Routes = [
       {
         path: 'order-manager',
         component: OrdersManagerComponent,
-        title: 'Orders',
+        title: 'Order Management',
+        children: [
+          {
+            path: '',
+            component: AllOrdersComponent,
+          },
+          {
+            path: 'order/:orderId',
+            component: SingleOrderComponent,
+          },
+        ],
       },
     ],
   },
@@ -78,6 +90,11 @@ export const routes: Routes = [
     ],
   },
   { path: 'search', component: SearchComponent, title: 'Search' },
-  { path: 'checkout', canActivate: [authGuard], component: CheckoutComponent ,title:"Checkout"},
+  {
+    path: 'checkout',
+    canActivate: [authGuard],
+    component: CheckoutComponent,
+    title: 'Checkout',
+  },
   { path: 'order', canActivate: [authGuard], component: OrderComponent },
 ];
