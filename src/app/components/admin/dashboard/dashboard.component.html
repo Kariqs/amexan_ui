@@ -1,3 +1,69 @@
-<div class="p-4 text-center">
-    Admin Dashboard.
+<div class="p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <h1 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Amexan Admin Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="rounded-lg shadow p-4 bg-indigo-50 dark:bg-indigo-900">
+            <p class="text-sm uppercase font-semibold text-gray-600 dark:text-indigo-300">Available Products</p>
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">{{totalProducts}}</h2>
+        </div>
+        <div class="rounded-lg shadow p-4 bg-green-50 dark:bg-green-900">
+            <p class="text-sm uppercase font-semibold text-gray-600 dark:text-green-300">Customers</p>
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Not Implemented</h2>
+        </div>
+        <div class="rounded-lg shadow p-4 bg-yellow-50 dark:bg-yellow-900">
+            <p class="text-sm uppercase font-semibold text-gray-600 dark:text-yellow-300">Undelivered Orders</p>
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Not Implemented</h2>
+        </div>
+        <div class="rounded-lg shadow p-4 bg-blue-50 dark:bg-blue-900">
+            <p class="text-sm uppercase font-semibold text-gray-600 dark:text-blue-300">Total Orders</p>
+            <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">{{totalOrders}}</h2>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6 mb-8">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Recent Orders</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm text-left">
+                <thead class="text-gray-600 dark:text-gray-300 border-b border-gray-200 dark:border-gray-700">
+                    <tr>
+                        <th class="py-2 px-4">Order ID</th>
+                        <th class="py-2 px-4">Customer</th>
+                        <th class="py-2 px-4">Status</th>
+                        <th class="py-2 px-4">Total</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700 dark:text-gray-300">
+                    <tr (click)="onRecentOrderClick(order.ID)" *ngFor="let order of recentOrders"
+                        class="border-b border-gray-100 dark:border-gray-700">
+                        <td class="py-2 px-4">#{{order.ID}}</td>
+                        <td class="py-2 px-4">{{order.firstName}} {{order.lastName}}</td>
+                        <td class="py-2 px-4 text-yellow-600 dark:text-yellow-300">{{order.status}}</td>
+                        <td class="py-2 px-4">{{order.total | currency:"KES":"symbol"}}</td>
+                    </tr>
+                    <!-- Additional rows can go here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Actions and Chart Section -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h3 class="text-sm uppercase font-bold text-gray-900 dark:text-white mb-4">Quick Actions</h3>
+            <div class="flex gap-4 flex-wrap">
+                <button (click)="onAddProduct()"
+                    class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Add Product</button>
+                <button (click)="onViewAllOrders()"
+                    class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600">View All Orders</button>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+            <h3 class="text-sm uppercase font-bold text-gray-900 dark:text-white mb-4">Sales Overview</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Chart placeholder – integrate with ngx-charts or
+                Chart.js</p>
+        </div>
+    </div>
 </div>
