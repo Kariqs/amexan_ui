@@ -40,4 +40,13 @@ export class OrderService {
       )
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
+
+  updateOrderStatus(
+    orderId: number,
+    patchData: { status: string }
+  ): Observable<{ message: string }> {
+    return this.http
+      .patch<{ message: string }>(`${this.apiUrl}/order/${orderId}`, patchData)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
 }

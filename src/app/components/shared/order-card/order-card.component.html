@@ -28,13 +28,14 @@
             <!-- Status Select for Admins -->
             <div *ngIf="isAdmin" class="flex flex-col">
                 <label class="text-xs text-gray-600 dark:text-gray-400 mb-1">Status</label>
-                <select [(ngModel)]="order.status" (change)="onStatusChange(order.ID, order.status)"
+                <select [(ngModel)]="order.status" (change)="onStatusChange($event,order.ID)"
                     class="px-3 py-1 text-sm font-medium rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <option value="pending">Pending</option>
-                    <option value="processing">Processing</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="completed">Completed</option>
-                    <option value="cancelled">Cancelled</option>
+                    <option value="" disabled selected>{{order.status}}</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
                 </select>
             </div>
         </div>
