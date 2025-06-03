@@ -7,10 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { ModalComponent } from "../../../shared/modal/modal.component";
 
 @Component({
   selector: 'app-single-order',
-  imports: [CommonModule, OrderCardComponent],
+  imports: [CommonModule, OrderCardComponent, ModalComponent],
   templateUrl: './single-order.component.html',
   styleUrl: './single-order.component.css',
 })
