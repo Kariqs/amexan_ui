@@ -6,10 +6,11 @@ import { AuthService } from '../../services/auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { OrderCardComponent } from '../shared/order-card/order-card.component';
+import { ModalComponent } from "../shared/modal/modal.component";
 
 @Component({
   selector: 'app-order',
-  imports: [CommonModule, OrderCardComponent],
+  imports: [CommonModule, OrderCardComponent, ModalComponent],
   templateUrl: './order.component.html',
   styleUrl: './order.component.css',
 })
