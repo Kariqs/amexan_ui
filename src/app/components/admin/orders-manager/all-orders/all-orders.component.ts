@@ -5,10 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from "../../../shared/modal/modal.component";
 
 @Component({
   selector: 'app-all-orders',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalComponent],
   templateUrl: './all-orders.component.html',
   styleUrl: './all-orders.component.css',
 })

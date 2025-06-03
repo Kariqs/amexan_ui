@@ -5,10 +5,11 @@ import { ProductsService } from '../../../../services/products/products.service'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ModalComponent } from "../../../shared/modal/modal.component";
 
 @Component({
   selector: 'app-all-products',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ModalComponent],
   templateUrl: './all-products.component.html',
   styleUrl: './all-products.component.css',
 })
