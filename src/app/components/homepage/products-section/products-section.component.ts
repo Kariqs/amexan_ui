@@ -4,11 +4,17 @@ import { Product, Section } from '../../../models/model';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
 import { ProductsService } from '../../../services/products/products.service';
 import { ToastrService } from 'ngx-toastr';
-import { PaginationComponent } from "../../shared/pagination/pagination.component";
+import { PaginationComponent } from '../../shared/pagination/pagination.component';
+import { ModalComponent } from '../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-products-section',
-  imports: [CommonModule, ProductCardComponent, PaginationComponent],
+  imports: [
+    CommonModule,
+    ProductCardComponent,
+    PaginationComponent,
+    ModalComponent,
+  ],
   templateUrl: './products-section.component.html',
   styleUrl: './products-section.component.css',
 })
@@ -25,6 +31,7 @@ export class ProductsSectionComponent implements OnInit {
     total: number;
   };
   status: 'loading' | 'success' | 'error' = 'loading';
+  loadingMessage: string = 'Loading Products';
 
   constructor(
     private productsService: ProductsService,

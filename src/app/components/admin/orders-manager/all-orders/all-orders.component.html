@@ -1,12 +1,5 @@
 <div class="w-full p-2">
-    <div *ngIf="status === 'loading'" class="flex flex-col items-center">
-        <svg class="animate-spin h-8 w-8 text-violet-600 mb-4 dark:text-violet-400" xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-        </svg>
-        <p class="text-gray-600 dark:text-gray-300">Loading Orders...</p>
-    </div>
+    <app-modal *ngIf="status==='loading'" [message]="'Loading Orders'"></app-modal>
 
     <div *ngIf="status === 'success'" class="w-full overflow-x-auto">
         <h2 class="text-gray-900 dark:text-white uppercase text-center p-2 font-semibold">All Orders</h2>
