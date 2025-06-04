@@ -49,4 +49,12 @@ export class OrderService {
       .patch<{ message: string }>(`${this.apiUrl}/order/${orderId}`, patchData)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
+
+  getUndeliveredOrdersCount(): Observable<{ undeliveredOrderCount: number }> {
+    return this.http
+      .get<{ undeliveredOrderCount: number }>(
+        `${this.apiUrl}/orders/undelivered`
+      )
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
 }
