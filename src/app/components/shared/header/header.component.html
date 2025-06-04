@@ -9,7 +9,7 @@
         </div>
 
         <!-- Desktop Search Bar -->
-        <div
+        <div *ngIf="!userState.isAdmin"
             class="bg-white dark:bg-gray-800 hidden lg:block p-1 text-gray-600 dark:text-gray-300 rounded-sm flex-1 max-w-md">
             <div class="flex items-center">
                 <input placeholder="Search products..." [(ngModel)]="searchTerm" (input)="onSearch()"

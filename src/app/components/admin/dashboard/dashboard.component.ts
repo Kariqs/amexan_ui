@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
   totalProducts!: number;
   recentOrders!: Order[];
   customers = 1245;
-  undeliveredOrders = 42;
+  undeliveredOrders!: number;
   totalOrders!: number;
 
   constructor(
@@ -49,6 +49,17 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getUndeliveredOrdersCount() {
+    this.orderService.getUndeliveredOrdersCount().subscribe({
+      next: (response) => {
+        this.undeliveredOrders = response.undeliveredOrderCount;
+      },
+      error: (error) => {
+        this.toaster.error(error);
+      },
+    });
+  }
+
   onAddProduct() {
     this.router.navigate(['admin', 'product-manager', 'create-product']);
   }
@@ -64,5 +75,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.fetchTotalProducts();
     this.fetchTotalOrders();
+    this.getUndeliveredOrdersCount();
   }
 }
