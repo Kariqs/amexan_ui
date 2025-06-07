@@ -107,7 +107,7 @@ export interface Order {
   deliveryLocation: string;
   total: number;
   CreatedAt: string;
-  status?: string;
+  status: string;
   orderItems: OrderItems[];
 }
 
