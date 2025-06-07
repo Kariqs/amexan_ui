@@ -3,9 +3,9 @@ import { Component, Input } from '@angular/core';
 import { Order } from '../../../models/model';
 import { FormsModule } from '@angular/forms';
 import { OrderService } from '../../../services/order/order.service';
-import { AuthService } from '../../../services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from '../modal/modal.component';
+import { PdfUtil } from '../../../utils/generateReceipt.util';
 
 @Component({
   selector: 'app-order-card',
@@ -19,6 +19,8 @@ export class OrderCardComponent {
   @Input() isAdmin!: boolean;
   isUpdatingStatus: boolean = false;
   updatingMessage: string = 'Updating Order Status';
+  imageURL = 'https://www.amexan.store/images/logo.png';
+  isGeneratingReceipt = false;
 
   constructor(
     private orderService: OrderService,
@@ -32,11 +34,16 @@ export class OrderCardComponent {
   contactSupport(arg0: number) {
     throw new Error('Method not implemented.');
   }
-  printReceipt(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
-  generateInvoice(arg0: number) {
-    throw new Error('Method not implemented.');
+
+  async printReceipt(order: Order, imageUrl: string) {
+    try {
+      this.isGeneratingReceipt = true;
+      await PdfUtil.generateReceipt(order, imageUrl);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      this.isGeneratingReceipt = false;
+    }
   }
 
   deleteOrder(arg0: number) {
@@ -46,6 +53,7 @@ export class OrderCardComponent {
   refundOrder(arg0: number) {
     throw new Error('Method not implemented.');
   }
+
   onStatusChange(event: Event, orderId: number) {
     this.isUpdatingStatus = true;
     const selectedValue = (event.target as HTMLSelectElement).value;
