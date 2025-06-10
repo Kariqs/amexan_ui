@@ -6,6 +6,7 @@ import { OrderService } from '../../../services/order/order.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from '../modal/modal.component';
 import { PdfUtil } from '../../../utils/generateReceipt.util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-card',
@@ -24,7 +25,8 @@ export class OrderCardComponent {
 
   constructor(
     private orderService: OrderService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private router: Router
   ) {}
 
   toggleItemsVisibility(): void {
@@ -46,8 +48,17 @@ export class OrderCardComponent {
     }
   }
 
-  deleteOrder(arg0: number) {
-    throw new Error('Method not implemented.');
+  deleteOrder(orderId: number) {
+    this.orderService.deleteOrder(orderId).subscribe({
+      next: (response) => {
+        this.router.navigate(['admin', 'order-manager']).then(() => {
+          this.toaster.info(response.message);
+        });
+      },
+      error: (error) => {
+        this.toaster.error(error.message);
+      },
+    });
   }
 
   refundOrder(arg0: number) {

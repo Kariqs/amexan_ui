@@ -57,4 +57,10 @@ export class OrderService {
       )
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
+
+  deleteOrder(orderId: number): Observable<{ message: string }> {
+    return this.http
+      .delete<{ message: string }>(`${this.apiUrl}/order/${orderId}`)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
 }
