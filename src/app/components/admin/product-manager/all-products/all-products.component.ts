@@ -5,7 +5,7 @@ import { ProductsService } from '../../../../services/products/products.service'
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { ModalComponent } from "../../../shared/modal/modal.component";
+import { ModalComponent } from '../../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-all-products',
@@ -19,6 +19,7 @@ export class AllProductsComponent implements OnInit {
   products!: Product[];
   numberOfRecords: number[] = [3, 5, 10, 15, 20, 25, 50, 100];
   pageMetadata!: PageMetadata;
+  deletingProductId: number | null = null;
 
   constructor(
     private productService: ProductsService,
@@ -62,6 +63,23 @@ export class AllProductsComponent implements OnInit {
       error: (err) => {
         this.status = 'error';
         this.toaster.error(err.message);
+      },
+    });
+  }
+
+  deleteProduct(productId: number) {
+    this.deletingProductId = productId;
+    this.productService.deleteProduct(productId).subscribe({
+      next: (response) => {
+        this.router.navigate(['admin', 'product-manager']).then(() => {
+          window.location.reload();
+          this.toaster.info(response.message);
+          this.deletingProductId = null;
+        });
+      },
+      error: (err) => {
+        this.toaster.error(err.message);
+        this.deletingProductId = null;
       },
     });
   }
