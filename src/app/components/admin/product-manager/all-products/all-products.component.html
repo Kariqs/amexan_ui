@@ -68,9 +68,10 @@
                             class="p-2 rounded-sm bg-amber-500 text-white font-semibold uppercase hover:bg-amber-600 transition dark:bg-amber-400 dark:hover:bg-amber-500">
                             Update
                         </button>
-                        <button
+                        <button *ngIf="product.ID" [disabled]="deletingProductId===product.ID"
+                            (click)="deleteProduct(product.ID)"
                             class="p-2 rounded-sm bg-rose-500 text-white font-semibold uppercase hover:bg-rose-600 transition dark:bg-rose-400 dark:hover:bg-rose-500">
-                            Delete
+                            {{deletingProductId===product.ID ? 'Deleting...' : 'Delete'}}
                         </button>
                     </td>
                 </tr>

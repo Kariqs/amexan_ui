@@ -56,4 +56,10 @@ export class ProductsService {
       .get<Product>(`${this.apiUrl}/product/${productId}`)
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
+
+  deleteProduct(productId: number): Observable<{ message: string }> {
+    return this.http
+      .delete<{ message: string }>(`${this.apiUrl}/product/${productId}`)
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
 }
