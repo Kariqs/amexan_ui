@@ -26,6 +26,7 @@ export class CheckoutComponent implements OnInit {
   shipping!: number;
   checkoutData!: Order;
   userId!: number;
+  isPlacingOrder = false;
 
   orderItems!: CartItem[];
 
@@ -104,18 +105,19 @@ export class CheckoutComponent implements OnInit {
       })),
     };
 
+    this.isPlacingOrder = true;
     this.checkoutService.createOrder(this.checkoutData).subscribe({
-      next: (response: any) => {
+      next: (response) => {
         if (response) {
-          this.router.navigate(['order']).then(() => {
-            this.toaster.info('Your order has been placed successfully.');
-            this.cartService.clearCart();
-          });
+          this.isPlacingOrder = false;
+          window.location.href = response.redirect_url;
         } else {
+          this.isPlacingOrder = false;
           this.toaster.error('There was an error placing your order.');
         }
       },
       error: (err) => {
+        this.isPlacingOrder = false;
         this.toaster.error(err.message);
       },
     });
