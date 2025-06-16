@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { Product } from '../../../../models/model';
 import { ProductsService } from '../../../../services/products/products.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
@@ -21,17 +21,66 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateProductComponent {
   productForm!: FormGroup;
   isSubmitting = false;
+  isEditMode = false;
+  productId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private productService: ProductsService,
     private router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.initForm();
-    this.addColor();
+    this.checkEditMode();
+  }
+
+  checkEditMode(): void {
+    this.route.queryParams.subscribe((params) => {
+      const edit = params['edit'] === 'true';
+      const id = +params['id'];
+
+      if (edit && id) {
+        this.isEditMode = true;
+        this.productId = id;
+        this.fetchProduct(id);
+      } else {
+        this.addColor();
+      }
+    });
+  }
+
+  fetchProduct(id: number): void {
+    this.productService.getProductById(id).subscribe({
+      next: (product: Product) => {
+        this.populateForm(product);
+      },
+      error: (err) => {
+        this.toaster.error('Failed to fetch product.');
+      },
+    });
+  }
+
+  populateForm(product: Product): void {
+    this.productForm.patchValue({
+      brand: product.brand,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      category: product.category,
+    });
+
+    // Clear existing colors and set new ones
+    this.colorsArray.clear();
+    if (product.colors && product.colors.length) {
+      product.colors.forEach((color) => {
+        this.colorsArray.push(this.fb.control(color, Validators.required));
+      });
+    } else {
+      this.addColor();
+    }
   }
 
   initForm(): void {
@@ -72,22 +121,34 @@ export class CreateProductComponent {
 
     this.isSubmitting = true;
     const productData: Product = this.productForm.value;
-    console.log(productData);
 
-    this.productService.createProduct(productData).subscribe({
-      next: (savedProduct) => {
-        this.isSubmitting = false;
-        // Navigate to the next step, passing the product ID
-        this.router
-          .navigate(['admin', 'product-manager', 'assets', savedProduct.ID])
-          .then(() => {
-            this.toaster.success('Product details saved successfully.');
-          });
-      },
-      error: (error) => {
-        this.isSubmitting = false;
-        this.toaster.error('Unable to save product details.');
-      },
-    });
+    if (this.isEditMode && this.productId) {
+      this.productService.updateProduct(this.productId, productData).subscribe({
+        next: () => {
+          this.isSubmitting = false;
+          this.toaster.info('Product updated successfully.');
+          this.router.navigate(['admin', 'product-manager']);
+        },
+        error: () => {
+          this.isSubmitting = false;
+          this.toaster.error('Failed to update product.');
+        },
+      });
+    } else {
+      this.productService.createProduct(productData).subscribe({
+        next: (savedProduct) => {
+          this.isSubmitting = false;
+          this.router
+            .navigate(['admin', 'product-manager', 'assets', savedProduct.ID])
+            .then(() => {
+              this.toaster.info('Product created successfully.');
+            });
+        },
+        error: () => {
+          this.isSubmitting = false;
+          this.toaster.error('Failed to create product.');
+        },
+      });
+    }
   }
 }

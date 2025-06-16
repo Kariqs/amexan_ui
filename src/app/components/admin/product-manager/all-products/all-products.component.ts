@@ -67,6 +67,12 @@ export class AllProductsComponent implements OnInit {
     });
   }
 
+  updateProduct(productId: number) {
+    this.router.navigate(['admin', 'product-manager', 'create-product'], {
+      queryParams: { edit: true, id: productId },
+    });
+  }
+
   deleteProduct(productId: number) {
     this.deletingProductId = productId;
     this.productService.deleteProduct(productId).subscribe({
