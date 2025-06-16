@@ -13,9 +13,14 @@ export class CheckoutService {
 
   apiUrl = environment.apiUrl;
 
-  createOrder(orderInfo: Order) {
+  createOrder(
+    orderInfo: Order
+  ): Observable<{ message: string; redirect_url: string; order_id: number }> {
     return this.http
-      .post(`${this.apiUrl}/order`, orderInfo)
+      .post<{ message: string; redirect_url: string; order_id: number }>(
+        `${this.apiUrl}/order`,
+        orderInfo
+      )
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
 }
