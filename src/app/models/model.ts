@@ -108,6 +108,7 @@ export interface Order {
   total: number;
   CreatedAt: string;
   status: string;
+  paymentStatus: string;
   orderItems: OrderItems[];
 }
 

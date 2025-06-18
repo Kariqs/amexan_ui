@@ -23,4 +23,14 @@ export class CheckoutService {
       )
       .pipe(catchError((error) => this.authService.handleError(error)));
   }
+
+  checkPaymentStatus(
+    orderTrackingId: string
+  ): Observable<{ paymentStatus: string }> {
+    return this.http
+      .get<{ paymentStatus: string }>(
+        `${this.apiUrl}/paymentstatus?OrderTrackingId=${orderTrackingId}`
+      )
+      .pipe(catchError((error) => this.authService.handleError(error)));
+  }
 }

@@ -24,6 +24,7 @@ import { AllOrdersComponent } from './components/admin/orders-manager/all-orders
 import { SingleOrderComponent } from './components/admin/orders-manager/single-order/single-order.component';
 import { userGuard } from './services/guards/admin/user.guard';
 import { adminGuard } from './services/guards/admin/admin.guard';
+import { PaymentStatusComponent } from './components/checkout/payment-status/payment-status.component';
 
 export const routes: Routes = [
   {
@@ -120,7 +121,14 @@ export const routes: Routes = [
   },
   {
     path: 'order',
+    title: 'My Orders',
     canActivate: [authGuard, userGuard],
     component: OrderComponent,
+  },
+  {
+    path: 'paymentstatus',
+    title: 'Payment Status',
+    canActivate: [authGuard, userGuard],
+    component: PaymentStatusComponent,
   },
 ];
