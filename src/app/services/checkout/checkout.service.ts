@@ -14,7 +14,7 @@ export class CheckoutService {
   apiUrl = environment.apiUrl;
 
   createOrder(
-    orderInfo: Order
+    orderInfo: any
   ): Observable<{ message: string; redirect_url: string; order_id: number }> {
     return this.http
       .post<{ message: string; redirect_url: string; order_id: number }>(

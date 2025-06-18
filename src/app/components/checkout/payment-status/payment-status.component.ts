@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../../../services/checkout/checkout.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-payment-status',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './payment-status.component.html',
   styleUrl: './payment-status.component.css',
 })
@@ -16,8 +17,9 @@ export class PaymentStatusComponent implements OnInit {
 
   constructor(
     private checkoutService: CheckoutService,
-    private router: Router,
-    private route: ActivatedRoute
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +31,16 @@ export class PaymentStatusComponent implements OnInit {
       this.status = 'error';
       this.message = 'No tracking ID provided.';
     }
+  }
+
+  goToMyOrders() {
+    this.router.navigate(['order']).then(() => {
+      this.cartService.clearCart();
+    });
+  }
+
+  goToMyCart() {
+    this.router.navigate(['cart']);
   }
 
   checkStatus(orderTrackingId: string) {

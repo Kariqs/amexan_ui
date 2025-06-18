@@ -12,15 +12,15 @@
         <p class="text-lg mb-4">{{ message }}</p>
 
         <div *ngIf="status === 'success'" class="mt-6">
-            <a routerLink="/order"
-                class="bg-blue-500 dark:bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-600 dark:hover:bg-blue-500">
+            <a (click)="goToMyOrders()"
+                class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-500">
                 View My Orders
             </a>
         </div>
 
         <div *ngIf="status !== 'success'" class="mt-6">
-            <a routerLink="/cart"
-                class="bg-gray-500 dark:bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-600 dark:hover:bg-gray-500">
+            <a (click)="goToMyCart()"
+                class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 dark:hover:bg-indigo-500">
                 Go Back to Cart
             </a>
         </div>

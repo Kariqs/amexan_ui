@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ModalComponent } from '../modal/modal.component';
 import { PdfUtil } from '../../../utils/generateReceipt.util';
 import { Router } from '@angular/router';
+import { CheckoutService } from '../../../services/checkout/checkout.service';
 
 @Component({
   selector: 'app-order-card',
@@ -22,11 +23,13 @@ export class OrderCardComponent {
   updatingMessage: string = 'Updating Order Status';
   imageURL = 'https://www.amexan.store/images/logo.png';
   isGeneratingReceipt = false;
+  isCompletingPayment = false;
 
   constructor(
     private orderService: OrderService,
     private toaster: ToastrService,
-    private router: Router
+    private router: Router,
+    private checkoutService: CheckoutService
   ) {}
 
   toggleItemsVisibility(): void {
@@ -63,6 +66,45 @@ export class OrderCardComponent {
 
   refundOrder(arg0: number) {
     throw new Error('Method not implemented.');
+  }
+
+  completePayment(
+    orderId: number,
+    userId: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    deliveryLocation: string,
+    total: number
+  ) {
+    const orderInfo = {
+      ID: orderId,
+      userId: userId,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+      deliveryLocation: deliveryLocation,
+      total: total,
+    };
+
+    this.isCompletingPayment = true;
+    this.checkoutService.createOrder(orderInfo).subscribe({
+      next: (response) => {
+        if (response) {
+          this.isCompletingPayment = false;
+          window.location.href = response.redirect_url;
+        } else {
+          this.isCompletingPayment = false;
+          this.toaster.error('There was an error completing your payment.');
+        }
+      },
+      error: (err) => {
+        this.isCompletingPayment = false;
+        this.toaster.error(err.message);
+      },
+    });
   }
 
   onStatusChange(event: Event, orderId: number) {
