@@ -132,17 +132,27 @@ export class PdfUtil {
 
           y += 3;
           doc.text('Subtotal:', 25, y);
-          doc.text(`KSh ${(order.total - 200).toLocaleString()}`, 165, y);
+          doc.text(
+            `KSh ${(order.total / 1.1).toFixed(2).toLocaleString()}`,
+            165,
+            y
+          );
 
           y += 6;
           doc.text('Delivery Fee:', 25, y);
-          doc.text('KSh 200', 165, y);
+          doc.text(
+            `Ksh ${(order.total - order.total / 1.1)
+              .toFixed(2)
+              .toLocaleString()}`,
+            165,
+            y
+          );
 
           y += 8;
           doc.setFontSize(12);
           doc.setFont('helvetica', 'bold');
           doc.text('Grand Total:', 25, y);
-          doc.text(`KSh ${order.total.toLocaleString()}`, 165, y);
+          doc.text(`KSh ${order.total.toFixed(2).toLocaleString()}`, 165, y);
 
           y += 25;
 
