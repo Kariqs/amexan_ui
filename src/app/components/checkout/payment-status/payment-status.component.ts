@@ -18,7 +18,8 @@ export class PaymentStatusComponent implements OnInit {
   constructor(
     private checkoutService: CheckoutService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -32,13 +33,22 @@ export class PaymentStatusComponent implements OnInit {
     }
   }
 
+  goToMyOrders() {
+    this.router.navigate(['order']).then(() => {
+      this.cartService.clearCart();
+    });
+  }
+
+  goToMyCart() {
+    this.router.navigate(['cart']);
+  }
+
   checkStatus(orderTrackingId: string) {
     this.checkoutService.checkPaymentStatus(orderTrackingId).subscribe({
       next: (res) => {
         if (res.paymentStatus === 'Completed') {
           this.status = 'success';
           this.message = 'Payment completed successfully.';
-          this.cartService.clearCart();
         } else if (res.paymentStatus === 'Failed') {
           this.status = 'failed';
           this.message = 'Payment failed. Please try again.';

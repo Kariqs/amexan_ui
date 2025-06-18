@@ -196,9 +196,17 @@
             <span>{{ isGeneratingReceipt ? 'Generating...' : 'Generate Invoice' }}</span>
         </button>
 
-        <button *ngIf="!isAdmin" type="button" (click)="printReceipt(order, imageURL)" [disabled]="isGeneratingReceipt"
+        <button *ngIf="!isAdmin && order.paymentStatus==='Completed'" type="button"
+            (click)="printReceipt(order, imageURL)" [disabled]="isGeneratingReceipt"
             class="flex-1 bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-100 font-medium py-2 px-4 rounded-md transition duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
             <span>{{ isGeneratingReceipt ? 'Generating...' : 'Print Receipt' }}</span>
+        </button>
+
+        <button *ngIf="!isAdmin && order.paymentStatus!=='Completed'" type="button"
+            (click)="completePayment(order.ID,order.userId,order.firstName,order.lastName,order.email,order.phone,order.deliveryLocation,order.total)"
+            [disabled]="isCompletingPayment"
+            class="flex-1 bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-100 font-medium py-2 px-4 rounded-md transition duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+            <span>{{ isCompletingPayment ? 'Completing Payment...' : 'Complete Payment For this Order' }}</span>
         </button>
 
         <button *ngIf="!isAdmin" type="button" (click)="contactSupport(order.ID)"
