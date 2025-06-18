@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CheckoutService } from '../../../services/checkout/checkout.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../services/cart/cart.service';
 
 @Component({
   selector: 'app-payment-status',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './payment-status.component.html',
   styleUrl: './payment-status.component.css',
 })
@@ -16,7 +17,7 @@ export class PaymentStatusComponent implements OnInit {
 
   constructor(
     private checkoutService: CheckoutService,
-    private router: Router,
+    private cartService: CartService,
     private route: ActivatedRoute
   ) {}
 
@@ -37,6 +38,7 @@ export class PaymentStatusComponent implements OnInit {
         if (res.paymentStatus === 'Completed') {
           this.status = 'success';
           this.message = 'Payment completed successfully.';
+          this.cartService.clearCart();
         } else if (res.paymentStatus === 'Failed') {
           this.status = 'failed';
           this.message = 'Payment failed. Please try again.';
