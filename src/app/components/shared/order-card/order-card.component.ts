@@ -21,7 +21,7 @@ export class OrderCardComponent {
   @Input() isAdmin!: boolean;
   isUpdatingStatus: boolean = false;
   updatingMessage: string = 'Updating Order Status';
-  imageURL = 'https://www.amexan.store/images/logo.png';
+  imageURL = 'https://www.freeridge hub.store/images/logo.png';
   isGeneratingReceipt = false;
   isCompletingPayment = false;
 

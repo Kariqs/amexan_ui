@@ -30,7 +30,7 @@ export class PdfUtil {
           doc.setTextColor(darkText[0], darkText[1], darkText[2]);
           doc.setFontSize(16);
           doc.setFont('helvetica', 'bold');
-          doc.text('Amexan Medical Store', pageWidth / 2, 42, {
+          doc.text('Freeridge Hub Medical Store', pageWidth / 2, 42, {
             align: 'center',
           });
 

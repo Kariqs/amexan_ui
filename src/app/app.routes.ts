@@ -31,13 +31,13 @@ export const routes: Routes = [
     path: '',
     canActivate: [userGuard],
     component: HomepageComponent,
-    title: 'Home - Amexan',
+    title: 'Home - Freeridge Hub',
   },
   {
     path: 'admin',
     component: AdminComponent,
     canActivate: [authGuard, adminGuard],
-    title: 'Admin - Amexan',
+    title: 'Admin - Freeridge Hub',
     children: [
       {
         path: '',
@@ -75,7 +75,7 @@ export const routes: Routes = [
     path: 'shop',
     canActivate: [userGuard],
     component: ShopComponent,
-    title: 'Shop - Amexan',
+    title: 'Shop - Freeridge Hub',
   },
   { path: 'product/:id', component: ProductInfoComponent },
   {
@@ -88,22 +88,22 @@ export const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     children: [
-      { path: 'signup', component: SignupComponent, title: 'Signup - Amexan' },
+      { path: 'signup', component: SignupComponent, title: 'Signup - Freeridge Hub' },
       {
         path: 'verify-email',
         component: VerifyEmailComponent,
-        title: 'Verify - Email - Amexan',
+        title: 'Verify - Email - Freeridge Hub',
       },
-      { path: 'login', component: LoginComponent, title: 'Login - Amexan' },
+      { path: 'login', component: LoginComponent, title: 'Login - Freeridge Hub' },
       {
         path: 'forgot-password',
         component: ForgotPasswordComponent,
-        title: 'Forgot-Password - Amexan',
+        title: 'Forgot-Password - Freeridge Hub',
       },
       {
         path: 'reset-password',
         component: ResetPasswordComponent,
-        title: 'Reset-Password - Amexan',
+        title: 'Reset-Password - Freeridge Hub',
       },
     ],
   },

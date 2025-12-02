@@ -10,7 +10,7 @@ import { ThemeService } from './services/theme/theme.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'amexan';
+  title = 'freeridge hub';
 
   constructor(private themeService: ThemeService) {}
 
