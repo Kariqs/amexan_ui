@@ -52,14 +52,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ],
     sidebar: [
       { name: 'Home', link: '' },
-      { name: 'Student Packages', link: 'student-packages' },
-      { name: 'Intern Packages', link: 'intern-packages' },
-      { name: 'Medical Wears', link: 'medical-wears' },
-      { name: 'Diagnostic Equipments', link: 'diagnostic-equipments' },
-      { name: 'Medical Equipments', link: 'medical-equipments' },
-      { name: 'Surgical Equipments', link: 'surgical-equipments' },
-      { name: 'Laboratory Equipments', link: 'laboratory-equipments' },
-      { name: 'Imaging Products', link: 'imaging-products' },
+      { name: 'Laptops', link: 'laptops' },
+      { name: 'Phones', link: 'phones' },
+      { name: 'Accessories', link: 'accessories' },
       { name: 'Shop Now', link: 'shop' },
       { name: 'Contact Us', link: 'contact' },
     ],
@@ -73,7 +68,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     desktop: [
       { name: 'Home', link: '' },
       { name: 'Shop', link: 'shop' },
-      { name: 'Blog', link: 'blog' },
       { name: 'About Us', link: 'about' },
     ],
   };
@@ -239,7 +233,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Keyboard event handlers
   @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent): void {
+  onEscapeKey(event: any): void {
     this.closeAllDropdowns();
   }
 
