@@ -1,4 +1,7 @@
 <div class="min-h-screen flex flex-col">
+     <div class="flex-grow" *ngIf="!product">
+        <app-modal [message]="'Getting product info...'"></app-modal>
+    </div>
     <!-- Page content -->
     <div class="flex-grow" *ngIf="product">
         <app-details [product]="product"></app-details>

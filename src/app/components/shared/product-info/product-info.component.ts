@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Product, ProductSpec } from '../../../models/model';
 import { CommonModule } from '@angular/common';
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
   selector: 'app-product-info',
@@ -15,7 +16,8 @@ import { CommonModule } from '@angular/common';
     DetailsComponent,
     SpecificationsComponent,
     CommonModule,
-  ],
+    ModalComponent
+],
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.css',
 })
