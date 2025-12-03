@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Product, ProductSpec } from '../../../models/model';
 import { CommonModule } from '@angular/common';
 import { ModalComponent } from "../modal/modal.component";
+import { DescriptionComponent } from "./description/description.component";
 
 @Component({
   selector: 'app-product-info',
@@ -16,7 +17,8 @@ import { ModalComponent } from "../modal/modal.component";
     DetailsComponent,
     SpecificationsComponent,
     CommonModule,
-    ModalComponent
+    ModalComponent,
+    DescriptionComponent
 ],
   templateUrl: './product-info.component.html',
   styleUrl: './product-info.component.css',
